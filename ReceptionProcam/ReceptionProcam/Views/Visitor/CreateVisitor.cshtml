@@ -50,13 +50,7 @@
 
     <p class="alert alert-success" id="successMessage">@TempData["Success"]</p>
 }
-<script>
-    function x()
-    {
-        alert('@Session["CapturedImage"]')
-    }
 
-</script>
 @using (Html.BeginForm(new { @class = "m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed", role = "form" }))
 {
     @Html.AntiForgeryToken()

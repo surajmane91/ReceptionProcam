@@ -30,7 +30,7 @@ $(function () {
 function Capture() {
     webcam.capture();
     displayToastr();
-    x();
+
     //show();
 }
 function displayToastr() {
