@@ -6,7 +6,7 @@
 <head>
     <title>
     </title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"></link>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
     <script src="https://code.jquery.com/jquery-1.12.4.js">
     </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js">
@@ -25,18 +25,18 @@
                         <td>
                             <img src="~/Content/ncsiLogo.png" alt="Smiley face" style="height:23px; width:125px">
                         </td>
-                        <td>
-                            <label style="padding-left:50px; font-size:12px; font-weight:bold">Visitor Pass</label>
+                        <td style="background-color:#b5cbce;">
+                            <label style="padding-left:50px; font-size:12px; font-weight:bold;text-align:center;">Visitor Pass</label>
                         </td>
                     </tr>
+                    <tr><td><br /></td></tr>
                     <tr padding-top="5" style="height:10px">
                         <td rowspan="4">
-                            <img src="@Url.Content(Model.ImagePath)" alt="Visitor Photo" height="80" width="70">
+                            <img src="@Url.Content(Model.ImagePath)" alt="Visitor Photo" height="100" width="120">
                         </td>
                         <td>
                             <label style="font-weight:bold">Name:</label>
-                            <label style="font-weight:bold">@Model.First_Name</label>
-                           @* @Html.LabelFor(model => model.First_Name)*@
+                            <label style="font-weight:bold">@Model.First_Name @Model.Middel_Name @Model.Last_Name</label>
                         </td>
 
                     </tr>
@@ -44,7 +44,6 @@
 
                         <td colspan="2">
                             <label style="font-weight:bold">From:</label>
-                            @*@Html.LabelFor(model => model.Form, htmlAttributes: new { })*@
                             <label style="font-weight:bold">@Model.Form</label>
 
                         </td>
@@ -52,14 +51,12 @@
                     <tr style="height:10px">
                         <td>
                             <label style="font-weight:bold">To Meet:</label>
-                            @*@Html.LabelFor(model => model.ToMeet, htmlAttributes: new { })*@
                             <label style="font-weight:bold">@Model.ToMeet</label>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="2" style="height:10px">
                             <label style="font-weight:bold">Building:</label>
-                            @*@Html.LabelFor(model => model.Building, htmlAttributes: new { })*@
                             <label style="font-weight:bold">@Model.Building</label>
                         </td>
                     </tr>
@@ -67,14 +64,12 @@
                     <tr style="height:10px">
                         <td>
                             <label style="font-weight:bold">In Time:</label>
-                            @*@Html.LabelFor(model => model.TimeIn, htmlAttributes: new { })*@
                             <label style="font-weight:bold">@Model.TimeIn</label>
                         </td>
 
                         <td>
 
                             <label style="font-weight:bold">Valid Upto:</label>
-                            @*@Html.LabelFor(model => model.ValidUpto, htmlAttributes: new { })*@
                             <label style="font-weight:bold">@Model.ValidUpto</label>
                         </td>
 
@@ -83,14 +78,12 @@
                         <td>
 
                             <label style="font-weight:bold">Gate:</label>
-                            @*@Html.LabelFor(model => model.Gate, htmlAttributes: new { })*@
                             <label style="font-weight:bold">@Model.Gate</label>
                         </td>
 
                         <td>
 
                             <label style="font-weight:bold">Asset Id:</label>
-                            @*@Html.LabelFor(model => model.AssetId, htmlAttributes: new { })*@
                             <label style="font-weight:bold">@Model.AssetId</label>
                         </td>
                     </tr>
@@ -98,7 +91,6 @@
                         <td>
 
                             <label style="font-weight:bold">Purpose: </label>
-                            @*@Html.LabelFor(model => model.Purpose, htmlAttributes: new { })*@
                             <label style="font-weight:bold">@Model.Purpose</label>
                         </td>
                     </tr>
@@ -106,7 +98,6 @@
                         <td>
 
                             <label style="font-weight:bold">Remark:</label>
-                            @*@Html.LabelFor(model => model.Remark, htmlAttributes: new { })*@
                             <label style="font-weight:bold">@Model.Remark</label>
                         </td>
                     </tr>

@@ -13,8 +13,8 @@ namespace ReceptionProcam.Models
         [Required(ErrorMessage = "* Please enter First Name")]
         [DisplayName("First Name")]
         public string First_Name { get; set; }
-        [Required(ErrorMessage = "* Please enter Middel Name")]
-        [DisplayName("Middel Name")]
+        [Required(ErrorMessage = "* Please enter Middle Name")]
+        [DisplayName("Middle Name")]
         public string Middel_Name { get; set; }
         [DisplayName("Last Name")]
         [Required(ErrorMessage = "* Please enter Last Name")]
@@ -32,7 +32,7 @@ namespace ReceptionProcam.Models
         [DisplayName("Asset ID")]
         public string AssetId { get; set; }
 
-
+         [DisplayName("From")]
         [Required(ErrorMessage = "* Please From details")]
         public string Form { get; set; }
         [Required(ErrorMessage = "* Please enter First Name")]

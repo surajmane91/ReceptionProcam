@@ -29,49 +29,21 @@ $(function () {
 });
 function Capture() {
     webcam.capture();
+    displayToastr();
+    x();
+    //show();
+}
+function displayToastr() {
+    toastr.success('Image Captured');
+}
+function show() {
+    document.getElementById('imageDiv').style.maxHeight = "200px";
+    var images = document.querySelector("#imageDiv img");
+    images[0].src = document.getElementById("ImageId");
+    
 }
 
-//$(document).ready(function () {
-//    $('input[type=datetime]').datepicker({
-//        minDate:0,
-//        dateFormat: "dd/MM/yy",
-//        changeMonth: true,
-//        changeYear: true,
-//        yearRange: "-60:+0",
 
-//    });
-
-//});
-$(document).ready(function () {
-    $('#txtValidUpto').datepicker({
-        minDate: 0,
-        dateFormat: "dd/MM/yy",
-        changeMonth: true,
-        changeYear: true,
-        yearRange: "-60:+0",
-
-    });
-
-});
-
-function Print(formContainer) {
-    $.ajax({
-        type: "POST",
-        url: '/Visitor/VisitorIndex',
-        data: '',
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (r) {
-
-        },
-        failure: function (response) {
-            alert(response.d);
-        }
-    });
-    var wnd = window.open("");
-    wnd.document.write($("#printPage").html());
-    wnd.print();
-}
 
 function Cancel() {
     window.location = '';

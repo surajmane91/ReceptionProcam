@@ -12,6 +12,8 @@ namespace ReceptionProcam.EntityModel
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class DBNCSVisitorEntities : DbContext
     {
@@ -26,5 +28,10 @@ namespace ReceptionProcam.EntityModel
         }
     
         public virtual DbSet<tblVisitor> tblVisitors { get; set; }
+    
+        public virtual ObjectResult<uspGetVisitorPerDayCount1_Result> uspGetVisitorPerDayCount1()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<uspGetVisitorPerDayCount1_Result>("uspGetVisitorPerDayCount1");
+        }
     }
 }

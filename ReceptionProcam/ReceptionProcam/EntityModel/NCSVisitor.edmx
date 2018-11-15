@@ -29,10 +29,11 @@
           <Property Name="Remark" Type="nvarchar" MaxLength="50" />
           <Property Name="ImagePath" Type="nvarchar(max)" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
-          <Property Name="CreatedDate" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedDate" Type="date" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
-          <Property Name="ModifiedDate" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedDate" Type="date" />
         </EntityType>
+        <Function Name="uspGetVisitorPerDayCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="DBNCSVisitorModelStoreContainer">
           <EntitySet Name="tblVisitor" EntityType="Self.tblVisitor" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -59,9 +60,9 @@
           <Property Name="Remark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="0" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ModifiedDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
           <Property Name="GovId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="MobileNo" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="EmailId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -70,7 +71,17 @@
         </EntityType>
         <EntityContainer Name="DBNCSVisitorEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tblVisitors" EntityType="Self.tblVisitor" />
+          <FunctionImport Name="uspGetVisitorPerDayCount" ReturnType="Collection(DBNCSVisitorModel.uspGetVisitorPerDayCount_Result)" />
+          <FunctionImport Name="uspGetVisitorPerDayCount1" ReturnType="Collection(DBNCSVisitorModel.uspGetVisitorPerDayCount1_Result)" />
         </EntityContainer>
+        <ComplexType Name="uspGetVisitorPerDayCount_Result">
+          <Property Type="DateTime" Name="Date" Nullable="true" />
+          <Property Type="Int32" Name="No_of_Visitor" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="uspGetVisitorPerDayCount1_Result">
+          <Property Type="DateTime" Name="VisDate" Nullable="true" />
+          <Property Type="Int32" Name="No_of_Visitor" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -106,6 +117,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="uspGetVisitorPerDayCount1" FunctionName="DBNCSVisitorModel.Store.uspGetVisitorPerDayCount">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBNCSVisitorModel.uspGetVisitorPerDayCount1_Result">
+                <ScalarProperty Name="VisDate" ColumnName="VisDate" />
+                <ScalarProperty Name="No_of_Visitor" ColumnName="No_of_Visitor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

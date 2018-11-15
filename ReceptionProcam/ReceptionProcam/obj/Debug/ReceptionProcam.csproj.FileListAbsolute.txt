@@ -50,6 +50,6 @@ C:\Users\surajmane\documents\visual studio 2013\Projects\ReceptionProcam\Recepti
 C:\Users\surajmane\documents\visual studio 2013\Projects\ReceptionProcam\ReceptionProcam\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\surajmane\documents\visual studio 2013\Projects\ReceptionProcam\ReceptionProcam\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\surajmane\documents\visual studio 2013\Projects\ReceptionProcam\ReceptionProcam\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\surajmane\documents\visual studio 2013\Projects\ReceptionProcam\ReceptionProcam\obj\Debug\ReceptionProcam.csprojResolveAssemblyReference.cache
 C:\Users\surajmane\documents\visual studio 2013\Projects\ReceptionProcam\ReceptionProcam\obj\Debug\ReceptionProcam.dll
 C:\Users\surajmane\documents\visual studio 2013\Projects\ReceptionProcam\ReceptionProcam\obj\Debug\ReceptionProcam.pdb
+C:\Users\surajmane\documents\visual studio 2013\Projects\ReceptionProcam\ReceptionProcam\obj\Debug\ReceptionProcam.csprojResolveAssemblyReference.cache

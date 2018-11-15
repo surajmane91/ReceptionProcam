@@ -36,13 +36,14 @@ namespace ReceptionProcam.Controllers
             clsVisitor personal = new clsVisitor();
             var lastVisitorPassNumber = objVisEnti.tblVisitors.OrderByDescending(c => c.Id).FirstOrDefault();
             var date  = DateTime.Now.ToString("yyyy");
+            personal.ImagePath = string.Empty;
             if (lastVisitorPassNumber == null)
             {
                 personal.VisitorId = "NCSPUN" + Convert.ToString(date) + "1" ;
             }
             else
             {
-                personal.VisitorId = "NCSPUN" + (Convert.ToString(date) + lastVisitorPassNumber.Id+1);
+                personal.VisitorId = "NCSPUN" + Convert.ToString(date) +(Convert.ToInt32(lastVisitorPassNumber.Id)+1);
             }
             return View(personal);
             }
@@ -66,6 +67,7 @@ namespace ReceptionProcam.Controllers
                     string imagePath = string.Format("~/VisitorImage/{0}.png", imageName);
                     System.IO.File.WriteAllBytes(Server.MapPath(imagePath), ConvertHexToBytes(hexString));
                     Session["CapturedImage"] = VirtualPathUtility.ToAbsolute(imagePath);
+                    
                 }
             }
 
@@ -90,45 +92,54 @@ namespace ReceptionProcam.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
-                if (ModelState.IsValid)
+                if (Session["CapturedImage"].ToString() != null)
                 {
-                    tblVisitor dbVis = new tblVisitor();
-                    // Id, VisitorId, First_Name, Middel_Name, Last_Name, Form, ToMeet, SubLocation, Building, Gate,
-                    // Purpose, TimeIn, Remark, ImagePath, CreatedBy, CreatedDate, ModifiedBy, ModifiedDate
-                    //Random rmd = new Random(9999);
-                    dbVis.VisitorId = objVisitor.VisitorId;
-                    dbVis.First_Name = objVisitor.First_Name;
-                    dbVis.Middel_Name = objVisitor.Middel_Name;
-                    dbVis.Last_Name = objVisitor.Last_Name;
-                    dbVis.EmailId = objVisitor.Email;
-                    dbVis.MobileNo = objVisitor.MobileNo.ToString();
-                    dbVis.AssetId = objVisitor.AssetId.ToString();
-                    dbVis.Form = objVisitor.Form;
-                    dbVis.ToMeet = objVisitor.ToMeet;
-                    dbVis.SubLocation = objVisitor.SubLocation;
-                    dbVis.Building = objVisitor.Building;
-                    dbVis.Gate = objVisitor.Gate;
-                    dbVis.Purpose = objVisitor.Purpose;
-                    dbVis.TimeIn = objVisitor.TimeIn.ToString();
-                    dbVis.ValidUpto = objVisitor.ValidUpto.ToString();
-                    dbVis.Remark = objVisitor.Remark;
-                    dbVis.ImagePath = Session["CapturedImage"].ToString();
-                    dbVis.CreatedBy = objVisitor.CreatedBy;
-                    dbVis.CreatedDate = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                    objVisEnti.tblVisitors.Add(dbVis);
-                    objVisEnti.SaveChanges();
-                    TempData["Success"] = "Visitor added Successfully!";
-                    return RedirectToAction("PrintPass", new { id = dbVis.VisitorId });
+                    // TODO: Add insert logic here
+                    if (ModelState.IsValid)
+                    {
+                        tblVisitor dbVis = new tblVisitor();
+                        // Id, VisitorId, First_Name, Middel_Name, Last_Name, Form, ToMeet, SubLocation, Building, Gate,
+                        // Purpose, TimeIn, Remark, ImagePath, CreatedBy, CreatedDate, ModifiedBy, ModifiedDate
+                        //Random rmd = new Random(9999);
+                        dbVis.VisitorId = objVisitor.VisitorId;
+                        dbVis.First_Name = objVisitor.First_Name;
+                        dbVis.Middel_Name = objVisitor.Middel_Name;
+                        dbVis.Last_Name = objVisitor.Last_Name;
+                        dbVis.EmailId = objVisitor.Email;
+                        dbVis.MobileNo = objVisitor.MobileNo.ToString();
+                        dbVis.AssetId = objVisitor.AssetId.ToString();
+                        dbVis.Form = objVisitor.Form;
+                        dbVis.ToMeet = objVisitor.ToMeet;
+                        dbVis.SubLocation = objVisitor.SubLocation;
+                        dbVis.Building = objVisitor.Building;
+                        dbVis.Gate = objVisitor.Gate;
+                        dbVis.Purpose = objVisitor.Purpose;
+                        dbVis.TimeIn = objVisitor.TimeIn.ToString();
+                        dbVis.ValidUpto = objVisitor.ValidUpto.ToString();
+                        dbVis.Remark = objVisitor.Remark;
+                        dbVis.ImagePath = Session["CapturedImage"].ToString();
+                        dbVis.CreatedBy = objVisitor.CreatedBy;
+                        dbVis.CreatedDate = Convert.ToDateTime(System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                        objVisEnti.tblVisitors.Add(dbVis);
+                        objVisEnti.SaveChanges();
+                        TempData["Success"] = "Visitor added Successfully!";
+                        return RedirectToAction("PrintPass", new { id = dbVis.Id });
 
+                    }
+                    else
+                    {
+                        return View(objVisitor);
+                    }
                 }
                 else
                 {
+                    TempData["Success"] = "please take Photo first!";
                     return View(objVisitor);
                 }
             }
-            catch
+            catch(Exception ex)
             {
+                Console.WriteLine("Save"+ ex.Message);
                 return View(objVisitor);
             }
         }
@@ -140,7 +151,7 @@ namespace ReceptionProcam.Controllers
             try
             {
                 var VisData = objVisEnti.tblVisitors.Where(s => s.Id == Id).FirstOrDefault() ;
-                clsVisitor VisDtls = new clsVisitor{ Id = VisData.Id,VisitorId=VisData.VisitorId,First_Name=VisData.First_Name,Middel_Name=VisData.Middel_Name, Last_Name=VisData.Last_Name, Form=VisData.Form, ToMeet=VisData.ToMeet, SubLocation=VisData.SubLocation,AssetId=VisData.AssetId,MobileNo=VisData.MobileNo,Email=VisData.EmailId,ValidUpto=VisData.ValidUpto, Building=VisData.Building, Gate=VisData.Gate,Purpose=VisData.Purpose, TimeIn=VisData.TimeIn, Remark=VisData.Remark, ImagePath=VisData.ImagePath, CreatedBy=VisData.CreatedBy, CreatedDate=VisData.CreatedDate, ModifiedBy=VisData.ModifiedBy, ModifiedDate=VisData.ModifiedDate };
+                clsVisitor VisDtls = new clsVisitor { Id = VisData.Id, VisitorId = VisData.VisitorId, First_Name = VisData.First_Name, Middel_Name = VisData.Middel_Name, Last_Name = VisData.Last_Name, Form = VisData.Form, ToMeet = VisData.ToMeet, SubLocation = VisData.SubLocation, AssetId = VisData.AssetId, MobileNo = VisData.MobileNo, Email = VisData.EmailId, ValidUpto = VisData.ValidUpto, Building = VisData.Building, Gate = VisData.Gate, Purpose = VisData.Purpose, TimeIn = VisData.TimeIn, Remark = VisData.Remark, ImagePath = VisData.ImagePath, CreatedBy = VisData.CreatedBy, CreatedDate = VisData.CreatedDate.ToString(), ModifiedBy = VisData.ModifiedBy, ModifiedDate = VisData.ModifiedDate.ToString() };
                 return View(VisDtls);
             }
             catch (Exception)
@@ -179,9 +190,9 @@ namespace ReceptionProcam.Controllers
                         dbVis.TimeIn = objVisitor.TimeIn.ToString();
                         dbVis.ValidUpto = objVisitor.ValidUpto.ToString();
                         dbVis.Remark = objVisitor.Remark;
-                        dbVis.ImagePath = Session["CapturedImage"].ToString();
-                        dbVis.CreatedBy = objVisitor.CreatedBy;
-                        dbVis.CreatedDate = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                        dbVis.ImagePath = objVisitor.ImagePath;
+                        dbVis.ModifiedBy = objVisitor.CreatedBy;
+                        dbVis.ModifiedDate = Convert.ToDateTime(System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                         objVisEnti.tblVisitors.Add(dbVis);
 
                         objVisEnti.tblVisitors.Attach(dbVis);
@@ -234,6 +245,35 @@ namespace ReceptionProcam.Controllers
             {
                 var AllVisitors = objVisEnti.tblVisitors.ToList();
                 ViewBag.AllVisitorsDetalis = AllVisitors;
+
+
+                //var query = (from v in objVisEnti.tblVisitors
+                //             select new
+                //             {
+                //                 Id = v.Id,
+                //                 VisitorId = v.VisitorId,
+                //                 Name = v.First_Name + " " + v.Middel_Name + " " + v.Last_Name,
+                //                 GovId = v.GovId,
+                //                 MobileNo = v.MobileNo,
+                //                 EmailId = v.EmailId,
+                //                 AssetId = v.AssetId,
+                //                 Form = v.Form,
+                //                 ToMeet = v.ToMeet,
+                //                 SubLocation = v.SubLocation,
+                //                 Building = v.Building,
+                //                 Gate = v.Gate,
+                //                 Purpose = v.Purpose,
+                //                 TimeIn = v.TimeIn,
+                //                 ValidUpto = v.ValidUpto,
+                //                 Remark = v.Remark,
+                //                 ImagePath = v.ImagePath,
+                //                 CreatedBy = v.CreatedBy,
+                //                 CreatedDate = v.CreatedDate,
+                //                 ModifiedBy = v.ModifiedBy,
+                //                 ModifiedDate = v.ModifiedDate
+                //             }).ToList();
+               // ViewBag.AllVisitorsDetalis = query;
+
             }
             catch (Exception ex)
             {
@@ -256,18 +296,42 @@ namespace ReceptionProcam.Controllers
             }
         }
 
-        public ActionResult PrintPass(string Id)
+        public ActionResult PrintPass(int Id)
         {
             try
             {
-                var VisData = objVisEnti.tblVisitors.Where(s => s.VisitorId == Id).FirstOrDefault();
-                clsVisitor VisDtls = new clsVisitor { Id = VisData.Id, VisitorId = VisData.VisitorId, First_Name = VisData.First_Name, Middel_Name = VisData.Middel_Name, Last_Name = VisData.Last_Name, Form = VisData.Form, ToMeet = VisData.ToMeet, SubLocation = VisData.SubLocation, AssetId = VisData.AssetId, MobileNo = VisData.MobileNo, Email = VisData.EmailId, ValidUpto = VisData.ValidUpto, Building = VisData.Building, Gate = VisData.Gate, Purpose = VisData.Purpose, TimeIn = VisData.TimeIn, Remark = VisData.Remark, ImagePath = VisData.ImagePath, CreatedBy = VisData.CreatedBy, CreatedDate = VisData.CreatedDate, ModifiedBy = VisData.ModifiedBy, ModifiedDate = VisData.ModifiedDate };
+                var VisData = objVisEnti.tblVisitors.Where(s => s.Id == Id).FirstOrDefault();
+                clsVisitor VisDtls = new clsVisitor { Id = VisData.Id, VisitorId = VisData.VisitorId, First_Name = VisData.First_Name, Middel_Name = VisData.Middel_Name, Last_Name = VisData.Last_Name, Form = VisData.Form, ToMeet = VisData.ToMeet, SubLocation = VisData.SubLocation, AssetId = VisData.AssetId, MobileNo = VisData.MobileNo, Email = VisData.EmailId, ValidUpto = VisData.ValidUpto, Building = VisData.Building, Gate = VisData.Gate, Purpose = VisData.Purpose, TimeIn = VisData.TimeIn, Remark = VisData.Remark, ImagePath = VisData.ImagePath, CreatedBy = VisData.CreatedBy, CreatedDate = VisData.CreatedDate.ToString(), ModifiedBy = VisData.ModifiedBy, ModifiedDate = VisData.ModifiedDate.ToString() };
                 return View(VisDtls);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+
+                Console.WriteLine("Print" + ex.Message);
                 return View();
+            
+            //    return View();
+            }
+        }
+
+        [HttpGet]
+        public JsonResult Visitorperdaycount()
+        {
+            try
+            {
+                var result=objVisEnti.uspGetVisitorPerDayCount1();
+                if (result != null)
+                {
+                    return this.Json(result, JsonRequestBehavior.AllowGet);
+                }
+                else
+                { return this.Json("No Data", JsonRequestBehavior.AllowGet); }
+            }
+            catch
+            {
+                return this.Json("Error", JsonRequestBehavior.AllowGet);
             }
         }
     }
 }
+//The data reader is incompatible with the specified 'DBNCSVisitorModel.uspGetVisitorPerDayCount_Result'. A member of the type, 'Date', does not have a corresponding column in the data reader with the same name.

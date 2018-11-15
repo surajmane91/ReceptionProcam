@@ -30,5 +30,13 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="uspGetVisitorPerDayCount1" FunctionName="DBNCSVisitorModel.Store.uspGetVisitorPerDayCount">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBNCSVisitorModel.uspGetVisitorPerDayCount1_Result">
+          <ScalarProperty Name="VisDate" ColumnName="VisDate" />
+          <ScalarProperty Name="No_of_Visitor" ColumnName="No_of_Visitor" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

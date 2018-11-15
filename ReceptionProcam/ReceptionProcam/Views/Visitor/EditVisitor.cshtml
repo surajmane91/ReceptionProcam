@@ -1,11 +1,8 @@
 ﻿@model ReceptionProcam.Models.clsVisitor
 @section scripts
 {
-   
-@*<script src="~/Scripts/jquery-3.0.0.min.js"></script>*@
     <script src="~/Scripts/jquery.webcam.js"></script>
     <script src="~/Scripts/visitor.js"></script>
-    @*<link href="~/Content/Site.css" rel="stylesheet" />*@
     @Scripts.Render("~/bundles/jqueryval")
 }
 <script>
@@ -35,6 +32,13 @@
 
     });
 </script>
+<style>
+    .img-responsiveDiv {
+    width: 30%;
+    height: auto;
+}
+
+</style>
 @{
     List<SelectListItem> listItems = new List<SelectListItem>();
     listItems.Add(new SelectListItem
@@ -81,14 +85,15 @@
         <!--begin::Form-->
 
         <div class="m-portlet__body">
-            <div class="form-group m-form__group row">
-                <img src="@Url.Content(Model.ImagePath)" alt="Image" />
+            <div class="form-group m-form__group row img-responsiveDiv">
+                <img class="img-responsive" src="@Url.Content(Model.ImagePath)" alt="Image" style="width:100%; height:auto" />
+                @Html.HiddenFor(model => model.ImagePath)
                 @*<div id="webcam" class="col-lg-2">
 
-                </div>
-                <div class="col-lg-2 offset-2 camDivsty">
-                    <input type="button" class="btn btn-primary" value="Capture" onclick="Capture();" />
-                </div>*@
+            </div>
+            <div class="col-lg-2 offset-2 camDivsty">
+                <input type="button" class="btn btn-primary" value="Capture" onclick="Capture();" />
+            </div>*@
             </div>
             <br>
             <div class="form-group m-form__group row">
@@ -191,18 +196,16 @@
                 </div>
             </div>
         </div>
-        <div class="m-portlet__foot m-portlet__no-border m-portlet__foot--fit">
+        <div class="m-portlet__foot m-portlet__no-border m-portlet__foot--fit" style=" padding-left: 32%;">
             <div class="m-form__actions m-form__actions--solid">
                 <div class="row">
-                    <div class="col-lg-4"></div>
-                    <div class="col-lg-8">
+                    
                         <button type="submit" class="btn btn-primary">
                             Submit
                         </button>
-                        <button type="reset" class="btn btn-secondary">
+                        <button type="reset" class="btn btn-secondary" onclick="@("window.location.href='" + @Url.Action("VisitorDetails", "Visitor") + "'");">
                             Cancel
                         </button>
-                    </div>
                 </div>
             </div>
         </div>

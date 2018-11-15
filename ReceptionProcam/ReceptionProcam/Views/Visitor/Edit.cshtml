@@ -40,7 +40,7 @@
                             <th>@Html.DisplayName("To Meet")</th>
                             <th>@Html.DisplayName("Purpose")</th>
                             <th>
-                                Actionsq
+                                Action
                             </th>
                             <th>
                                 Print
@@ -56,8 +56,8 @@
                                 <td>@item.Last_Name</td>
                                 <td>@item.ToMeet</td>
                                 <td>@item.Purpose</td>
-                                <td>@Html.ActionLink("Details", "EditVisitor", new { id = item.Id })</td>
-                                <td>@Html.ActionLink("Print", "PrintPass", new { id = item.Id })</td>
+                                <td>@Html.ActionLink("Details", "EditVisitor", new { id = item.VisitorId })</td>
+                                <td>@Html.ActionLink("Print", "PrintPass", new { id = item.VisitorId })</td>
                             </tr>
                         }
                     </tbody>

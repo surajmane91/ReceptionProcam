@@ -29,9 +29,9 @@ namespace ReceptionProcam.EntityModel
         public string Remark { get; set; }
         public string ImagePath { get; set; }
         public string CreatedBy { get; set; }
-        public string CreatedDate { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
         public string ModifiedBy { get; set; }
-        public string ModifiedDate { get; set; }
+        public Nullable<System.DateTime> ModifiedDate { get; set; }
         public string GovId { get; set; }
         public string MobileNo { get; set; }
         public string EmailId { get; set; }

@@ -19,9 +19,9 @@
     <Property Name="Remark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="ImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CreatedDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
     <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="ModifiedDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
     <Property Name="GovId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="MobileNo" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="EmailId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -30,5 +30,15 @@
   </EntityType>
   <EntityContainer Name="DBNCSVisitorEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="tblVisitors" EntityType="Self.tblVisitor" />
+    <FunctionImport Name="uspGetVisitorPerDayCount" ReturnType="Collection(DBNCSVisitorModel.uspGetVisitorPerDayCount_Result)" />
+    <FunctionImport Name="uspGetVisitorPerDayCount1" ReturnType="Collection(DBNCSVisitorModel.uspGetVisitorPerDayCount1_Result)" />
   </EntityContainer>
+  <ComplexType Name="uspGetVisitorPerDayCount_Result">
+    <Property Type="DateTime" Name="Date" Nullable="true" />
+    <Property Type="Int32" Name="No_of_Visitor" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="uspGetVisitorPerDayCount1_Result">
+    <Property Type="DateTime" Name="VisDate" Nullable="true" />
+    <Property Type="Int32" Name="No_of_Visitor" Nullable="true" />
+  </ComplexType>
 </Schema>

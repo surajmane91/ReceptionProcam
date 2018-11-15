@@ -1,13 +1,18 @@
 ﻿@model ReceptionProcam.Models.clsVisitor
 <script language="javascript">
     function printdiv(printpage) {
-        //var WinPrint = window.open('', '', 'left=0,top=0,width=600,height=400,toolbar=1,scrollbars=1,status=0');
+        debugger;
+        //var st = document.getElementById(printpage);
+        //var WinPrint = window.open('', '', 'left=0,top=0,width=600,height=400,toolbar=1,scrollbars=1,status=0');
+        //WinPrint.document.write(st.innerHTML);
+        //WinPrint.print();
         var newstr = document.all.item(printpage).innerHTML;
         var oldstr = document.body.innerHTML;
         document.body.innerHTML = newstr;
         window.print();
         document.body.innerHTML = oldstr;
-        return false;
+           return false;
+
     
     }
 
@@ -39,8 +44,11 @@
             <div id="myPartialView">
                 @{Html.RenderPartial("Par_PrintVisitor", Model);}
             </div>
-            <div>
-                <input name="b_print" type="button" class="btn btn-success" onclick="printdiv('myPartialView');" value=" Print ">
+            <br />
+            <div style="padding-left: 40%;">
+                <input name="b_print" type="button" class="btn btn-success" onclick="printdiv('myPartialView');" value="Print">
+
+                <input name="b_cancel" type="button" class="btn btn-danger" onclick="@("window.location.href='" + @Url.Action("VisitorDetails", "Visitor") + "'");" value="Cancel">
             </div>
         </div>
     </div>

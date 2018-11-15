@@ -24,10 +24,11 @@
     <Property Name="Remark" Type="nvarchar" MaxLength="50" />
     <Property Name="ImagePath" Type="nvarchar(max)" />
     <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
-    <Property Name="CreatedDate" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreatedDate" Type="date" />
     <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
-    <Property Name="ModifiedDate" Type="nvarchar" MaxLength="50" />
+    <Property Name="ModifiedDate" Type="date" />
   </EntityType>
+  <Function Name="uspGetVisitorPerDayCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="DBNCSVisitorModelStoreContainer">
     <EntitySet Name="tblVisitor" EntityType="Self.tblVisitor" Schema="dbo" store:Type="Tables" />
   </EntityContainer>

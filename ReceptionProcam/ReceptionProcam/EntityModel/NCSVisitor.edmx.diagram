@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7bc3d0b07daf46f6b0bd65e84dddc9e9" Name="Diagram1">
+      <Diagram DiagramId="7bc3d0b07daf46f6b0bd65e84dddc9e9" Name="Diagram1" ZoomLevel="67">
         <EntityTypeShape EntityType="DBNCSVisitorModel.tblVisitor" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
