@@ -30,7 +30,7 @@ $(function () {
 function Capture() {
     webcam.capture();
     displayToastr();
-
+    //x();
     //show();
 }
 function displayToastr() {
@@ -48,3 +48,21 @@ function show() {
 function Cancel() {
     window.location = '';
 }
+
+$(document).ready(function () {
+    $('#txtValidUpto').datetimepicker({
+        minDate: new Date()
+
+
+    });
+
+});
+
+$(document).ready(function () {
+
+    $('#txtInTime').datetimepicker({
+        minDate: 0
+
+    });
+
+});

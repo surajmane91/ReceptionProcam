@@ -9,7 +9,10 @@ namespace ReceptionProcam.Models
     public class clsVisitor
     {
         public int Id { get; set; }
+        [ReadOnly(true)]
+        [Editable(true)]
         public string VisitorId { get; set; }
+        
         [Required(ErrorMessage = "* Please enter First Name")]
         [DisplayName("First Name")]
         public string First_Name { get; set; }
@@ -22,7 +25,7 @@ namespace ReceptionProcam.Models
 
         [DisplayName("Mobile No")]
         [Required(ErrorMessage = "* Please enter Mobile No")]
-        [MaxLength(10, ErrorMessage = "* Please enter 10 Digit mobile No")]
+        //[MaxLength(10, ErrorMessage = "* Please enter 10 Digit mobile No")]
         [RegularExpression(@"^(\d{10})$", ErrorMessage = "* Please enter Valid Digit mobile No")]
         public string MobileNo { get; set; }
         [Required(ErrorMessage = "* Mobile No is required")]
@@ -39,7 +42,7 @@ namespace ReceptionProcam.Models
         [DisplayName("Meet")]
         public string ToMeet { get; set; }
         [Required(ErrorMessage = "* Please enter sub Location")]
-        [DisplayName("Sub Location")]
+        [DisplayName("Office Sub Location")]
         public string SubLocation { get; set; }
         [Required(ErrorMessage = "* Please enter building")]
         [DisplayName("Building")]
