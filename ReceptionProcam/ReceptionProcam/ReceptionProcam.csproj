@@ -187,6 +187,9 @@
     <Compile Include="EntityModel\uspGetVisitorPerDayCount1_Result.cs">
       <DependentUpon>NCSVisitor.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModel\uspGetVisitorPerDayCount_Result.cs">
+      <DependentUpon>NCSVisitor.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

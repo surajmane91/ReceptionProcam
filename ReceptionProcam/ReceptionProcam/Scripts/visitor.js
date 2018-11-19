@@ -30,8 +30,6 @@ $(function () {
 function Capture() {
     webcam.capture();
     displayToastr();
-    //x();
-    //show();
 }
 function displayToastr() {
     toastr.success('Image Captured');
@@ -50,10 +48,16 @@ function Cancel() {
 }
 
 $(document).ready(function () {
+    $('#txtDOB').datetimepicker({
+        dateFormat: 'dd-mm-yy',
+        changeTime:false
+    });
+
+});
+
+
+$(document).ready(function () {
     $('#txtValidUpto').datetimepicker({
-        minDate: new Date()
-
-
     });
 
 });
@@ -61,8 +65,22 @@ $(document).ready(function () {
 $(document).ready(function () {
 
     $('#txtInTime').datetimepicker({
-        minDate: 0
-
     });
 
 });
+
+$(document).ready(function () {
+    $("#txtValidUpto").change(function () {
+        var startDate = $('#txtInTime').val();
+        var endDate = $('#txtValidUpto').val();
+
+        if (Date.parse(startDate) >= Date.parse(endDate)) {
+            alert("Validity Date and time is older than in Date time");
+
+            $('#txtValidUpto').val("");
+        }
+        
+    });
+});
+
+

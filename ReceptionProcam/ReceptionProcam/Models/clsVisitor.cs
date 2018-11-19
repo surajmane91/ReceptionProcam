@@ -23,6 +23,14 @@ namespace ReceptionProcam.Models
         [Required(ErrorMessage = "* Please enter Last Name")]
         public string Last_Name { get; set; }
 
+        [DisplayName("Date of Birth")]
+        [Required(ErrorMessage = "* Please enter Date of Birth")]
+        public string DOB { get; set; }
+
+        [DisplayName("Gov Id Proof")]
+        [Required(ErrorMessage = "* Please select Gov Id")]
+        public string GovId { get; set; }
+
         [DisplayName("Mobile No")]
         [Required(ErrorMessage = "* Please enter Mobile No")]
         //[MaxLength(10, ErrorMessage = "* Please enter 10 Digit mobile No")]

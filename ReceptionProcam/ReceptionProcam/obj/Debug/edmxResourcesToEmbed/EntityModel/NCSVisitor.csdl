@@ -27,6 +27,7 @@
     <Property Name="EmailId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="AssetId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="ValidUpto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DOB" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityContainer Name="DBNCSVisitorEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="tblVisitors" EntityType="Self.tblVisitor" />

@@ -33,23 +33,23 @@ namespace ReceptionProcam.Controllers
             try
             {
                 Session["CapturedImage"] = "";
-            clsVisitor personal = new clsVisitor();
-            var lastVisitorPassNumber = objVisEnti.tblVisitors.OrderByDescending(c => c.Id).FirstOrDefault();
-            var date  = DateTime.Now.ToString("yyyy");
-            personal.ImagePath = string.Empty;
-            if (lastVisitorPassNumber == null)
-            {
-                personal.VisitorId = "NCSPUN" + Convert.ToString(date) + "1" ;
-            }
-            else
-            {
-                personal.VisitorId = "NCSPUN" + Convert.ToString(date) +(Convert.ToInt32(lastVisitorPassNumber.Id)+1);
-            }
-            return View(personal);
+                clsVisitor personal = new clsVisitor();
+                var lastVisitorPassNumber = objVisEnti.tblVisitors.OrderByDescending(c => c.Id).FirstOrDefault();
+                var date = DateTime.Now.ToString("yyyy");
+                personal.ImagePath = string.Empty;
+                if (lastVisitorPassNumber == null)
+                {
+                    personal.VisitorId = "NCSPUN" + Convert.ToString(date) + "1";
+                }
+                else
+                {
+                    personal.VisitorId = "NCSPUN" + Convert.ToString(date) + (Convert.ToInt32(lastVisitorPassNumber.Id) + 1);
+                }
+                return View(personal);
             }
             catch (Exception)
             {
-                
+
                 return View();
             }
         }
@@ -58,20 +58,43 @@ namespace ReceptionProcam.Controllers
         public ActionResult Capture()
         {
 
-            if (Request.InputStream.Length > 0)
+            if (Session["CapturedImage"].ToString() == "")
             {
-                using (StreamReader reader = new StreamReader(Request.InputStream))
+                if (Request.InputStream.Length > 0)
                 {
-                    string hexString = Server.UrlEncode(reader.ReadToEnd());
-                    string imageName = DateTime.Now.ToString("ddMMyyhhmmsstt");
-                    string imagePath = string.Format("~/VisitorImage/{0}.png", imageName);
-                    System.IO.File.WriteAllBytes(Server.MapPath(imagePath), ConvertHexToBytes(hexString));
-                    Session["CapturedImage"] = VirtualPathUtility.ToAbsolute(imagePath);
-                    
-                }
-            }
+                    using (StreamReader reader = new StreamReader(Request.InputStream))
+                    {
+                        string hexString = Server.UrlEncode(reader.ReadToEnd());
+                        string imageName = DateTime.Now.ToString("ddMMyyhhmmsstt");
+                        string imagePath = string.Format("~/VisitorImage/{0}.png", imageName);
+                        System.IO.File.WriteAllBytes(Server.MapPath(imagePath), ConvertHexToBytes(hexString));
+                        Session["CapturedImage"] = VirtualPathUtility.ToAbsolute(imagePath);
 
-            return View();
+                    }
+                }
+
+                return View();
+            }
+            else
+            {
+                if (System.IO.File.Exists(Session["CapturedImage"].ToString()))
+                {
+                    System.IO.File.Delete(Session["CapturedImage"].ToString());
+                    if (Request.InputStream.Length > 0)
+                    {
+                        using (StreamReader reader = new StreamReader(Request.InputStream))
+                        {
+                            string hexString = Server.UrlEncode(reader.ReadToEnd());
+                            string imageName = DateTime.Now.ToString("ddMMyyhhmmsstt");
+                            string imagePath = string.Format("~/VisitorImage/{0}.png", imageName);
+                            System.IO.File.WriteAllBytes(Server.MapPath(imagePath), ConvertHexToBytes(hexString));
+                            Session["CapturedImage"] = VirtualPathUtility.ToAbsolute(imagePath);
+                        }
+                    }
+                }
+
+                return View();
+            }
         }
 
         private static byte[] ConvertHexToBytes(string hex)
@@ -118,6 +141,8 @@ namespace ReceptionProcam.Controllers
                         dbVis.ValidUpto = objVisitor.ValidUpto.ToString();
                         dbVis.Remark = objVisitor.Remark;
                         dbVis.ImagePath = Session["CapturedImage"].ToString();
+                        dbVis.GovId = objVisitor.GovId.ToString();
+                        dbVis.DOB = Convert.ToString(objVisitor.DOB);
                         dbVis.CreatedBy = objVisitor.CreatedBy;
                         dbVis.CreatedDate = Convert.ToDateTime(System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                         objVisEnti.tblVisitors.Add(dbVis);
@@ -137,9 +162,9 @@ namespace ReceptionProcam.Controllers
                     return View(objVisitor);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                Console.WriteLine("Save"+ ex.Message);
+                Console.WriteLine("Save" + ex.Message);
                 return View(objVisitor);
             }
         }
@@ -150,7 +175,7 @@ namespace ReceptionProcam.Controllers
         {
             try
             {
-                var VisData = objVisEnti.tblVisitors.Where(s => s.Id == Id).FirstOrDefault() ;
+                var VisData = objVisEnti.tblVisitors.Where(s => s.Id == Id).FirstOrDefault();
                 clsVisitor VisDtls = new clsVisitor { Id = VisData.Id, VisitorId = VisData.VisitorId, First_Name = VisData.First_Name, Middel_Name = VisData.Middel_Name, Last_Name = VisData.Last_Name, Form = VisData.Form, ToMeet = VisData.ToMeet, SubLocation = VisData.SubLocation, AssetId = VisData.AssetId, MobileNo = VisData.MobileNo, Email = VisData.EmailId, ValidUpto = VisData.ValidUpto, Building = VisData.Building, Gate = VisData.Gate, Purpose = VisData.Purpose, TimeIn = VisData.TimeIn, Remark = VisData.Remark, ImagePath = VisData.ImagePath, CreatedBy = VisData.CreatedBy, CreatedDate = VisData.CreatedDate.ToString(), ModifiedBy = VisData.ModifiedBy, ModifiedDate = VisData.ModifiedDate.ToString() };
                 return View(VisDtls);
             }
@@ -158,7 +183,7 @@ namespace ReceptionProcam.Controllers
             {
                 return View();
             }
-            
+
         }
 
         // POST: Visitor/EditVisitor/5
@@ -173,7 +198,7 @@ namespace ReceptionProcam.Controllers
                     var dbVis = objVisEnti.tblVisitors.SingleOrDefault(b => b.Id == Id);
                     if (dbVis != null)
                     {
-                        
+
                         dbVis.VisitorId = objVisitor.VisitorId;
                         dbVis.First_Name = objVisitor.First_Name;
                         dbVis.Middel_Name = objVisitor.Middel_Name;
@@ -193,6 +218,8 @@ namespace ReceptionProcam.Controllers
                         dbVis.ImagePath = objVisitor.ImagePath;
                         dbVis.ModifiedBy = objVisitor.CreatedBy;
                         dbVis.ModifiedDate = Convert.ToDateTime(System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                        dbVis.GovId = objVisitor.GovId.ToString();
+                        dbVis.DOB = Convert.ToString(objVisitor.DOB);
                         objVisEnti.tblVisitors.Add(dbVis);
 
                         objVisEnti.tblVisitors.Attach(dbVis);
@@ -272,7 +299,7 @@ namespace ReceptionProcam.Controllers
                 //                 ModifiedBy = v.ModifiedBy,
                 //                 ModifiedDate = v.ModifiedDate
                 //             }).ToList();
-               // ViewBag.AllVisitorsDetalis = query;
+                // ViewBag.AllVisitorsDetalis = query;
 
             }
             catch (Exception ex)
@@ -309,8 +336,8 @@ namespace ReceptionProcam.Controllers
 
                 Console.WriteLine("Print" + ex.Message);
                 return View();
-            
-            //    return View();
+
+                //    return View();
             }
         }
 
@@ -319,7 +346,7 @@ namespace ReceptionProcam.Controllers
         {
             try
             {
-                var result=objVisEnti.uspGetVisitorPerDayCount1();
+                var result = objVisEnti.uspGetVisitorPerDayCount1();
                 if (result != null)
                 {
                     return this.Json(result, JsonRequestBehavior.AllowGet);

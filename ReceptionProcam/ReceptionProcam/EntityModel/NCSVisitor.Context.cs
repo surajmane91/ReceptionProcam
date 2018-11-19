@@ -29,6 +29,11 @@ namespace ReceptionProcam.EntityModel
     
         public virtual DbSet<tblVisitor> tblVisitors { get; set; }
     
+        public virtual ObjectResult<uspGetVisitorPerDayCount_Result> uspGetVisitorPerDayCount()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<uspGetVisitorPerDayCount_Result>("uspGetVisitorPerDayCount");
+        }
+    
         public virtual ObjectResult<uspGetVisitorPerDayCount1_Result> uspGetVisitorPerDayCount1()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<uspGetVisitorPerDayCount1_Result>("uspGetVisitorPerDayCount1");

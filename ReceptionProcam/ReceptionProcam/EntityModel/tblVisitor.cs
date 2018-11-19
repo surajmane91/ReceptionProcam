@@ -37,5 +37,6 @@ namespace ReceptionProcam.EntityModel
         public string EmailId { get; set; }
         public string AssetId { get; set; }
         public string ValidUpto { get; set; }
+        public string DOB { get; set; }
     }
 }

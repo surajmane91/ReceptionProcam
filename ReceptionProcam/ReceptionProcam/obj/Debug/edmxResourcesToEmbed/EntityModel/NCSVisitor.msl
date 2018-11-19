@@ -4,6 +4,7 @@
     <EntitySetMapping Name="tblVisitors">
       <EntityTypeMapping TypeName="DBNCSVisitorModel.tblVisitor">
         <MappingFragment StoreEntitySet="tblVisitor">
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
           <ScalarProperty Name="ValidUpto" ColumnName="ValidUpto" />
           <ScalarProperty Name="AssetId" ColumnName="AssetId" />
           <ScalarProperty Name="EmailId" ColumnName="EmailId" />
