@@ -5,6 +5,7 @@
     
     <script src="~/Scripts/jquery.webcam.js"></script>
     <script src="~/Scripts/visitor.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
     }
 
 @{
@@ -95,7 +96,7 @@
             <div class="form-group m-form__group row">
                 <div class="col-lg-6">
                     @Html.LabelFor(model => model.VisitorId, htmlAttributes: new { })
-                    @Html.EditorFor(model => model.VisitorId, new { htmlAttributes = new { @class = "form-control m-input", @placeholder = "NCSIPUN201801", @readonly = "readonly" } })
+                    @Html.EditorFor(model => model.VisitorId, new { htmlAttributes = new { @class = "form-control m-input" ,@disable="disable"} })
                 </div>
                 <div class="col-lg-6">
                     @Html.LabelFor(model => model.Name, htmlAttributes: new { })

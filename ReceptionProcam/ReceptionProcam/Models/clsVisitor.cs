@@ -9,23 +9,23 @@ namespace ReceptionProcam.Models
     public class clsVisitor
     {
         public int Id { get; set; }
-        [ReadOnly(true)]
-        [Editable(true)]
+     
         public string VisitorId { get; set; }
         
         [Required(ErrorMessage = "* Please enter Name")]
         [DisplayName("Name")]
+        [RegularExpression("[a-zA-Z]*")]
         public string Name { get; set; }
 
         [DisplayName("Date of Birth")]
         [Required(ErrorMessage = "* Please enter Date of Birth")]
         public string DOB { get; set; }
 
-        [DisplayName("Gov Id Proof")]
-        [Required(ErrorMessage = "* Please select Gov Id")]
+        [DisplayName("Identification Proof")]
+        [Required(ErrorMessage = "* Please select any identity proof")]
         public string GovId { get; set; }
 
-        [DisplayName("Mobile No")]
+        [DisplayName("Contact No")]
         [Required(ErrorMessage = "* Please enter Mobile No")]
         //[MaxLength(10, ErrorMessage = "* Please enter 10 Digit mobile No")]
         [RegularExpression(@"^(\d{10})$", ErrorMessage = "* Please enter Valid Digit mobile No")]

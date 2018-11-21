@@ -101,7 +101,6 @@ namespace ReceptionProcam.Controllers
         public string GetCapture()
         {
             string url = Session["CapturedImage"].ToString();
-            //Session["CapturedImage"] = null;
             return url;
         }
         private static byte[] ConvertHexToBytes(string hex)
@@ -128,9 +127,6 @@ namespace ReceptionProcam.Controllers
                     if (ModelState.IsValid)
                     {
                         tblVisitor dbVis = new tblVisitor();
-                        // Id, VisitorId, First_Name, Middel_Name, Last_Name, Form, ToMeet, SubLocation, Building, Gate,
-                        // Purpose, TimeIn, Remark, ImagePath, CreatedBy, CreatedDate, ModifiedBy, ModifiedDate
-                        //Random rmd = new Random(9999);
                         dbVis.VisitorId = objVisitor.VisitorId;
                         dbVis.Name = objVisitor.Name;
                         dbVis.EmailId = objVisitor.Email;

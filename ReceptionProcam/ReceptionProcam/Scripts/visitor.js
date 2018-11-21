@@ -91,7 +91,7 @@ $(document).ready(function () {
         var endDate = $('#txtValidUpto').val();
 
         if (Date.parse(startDate) >= Date.parse(endDate)) {
-            toastr.warning("ValidUpto date  always greater than InTime Date.");
+            toastr.warning("Validity date  must be greater than InTime.");
             $('#txtValidUpto').val("");
         }
         
