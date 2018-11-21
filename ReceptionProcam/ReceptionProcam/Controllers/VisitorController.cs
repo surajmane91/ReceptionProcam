@@ -7,6 +7,7 @@ using ReceptionProcam.Models;
 using ReceptionProcam.EntityModel;
 using System.IO;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 
 namespace ReceptionProcam.Controllers
 {
@@ -163,10 +164,24 @@ namespace ReceptionProcam.Controllers
                     return View(objVisitor);
                 }
             }
-            catch (Exception ex)
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine("Save" + ex.Message);
+            //    return View(objVisitor);
+            //}
+            catch (DbEntityValidationException e)
             {
-                Console.WriteLine("Save" + ex.Message);
-                return View(objVisitor);
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+                throw;
             }
         }
 

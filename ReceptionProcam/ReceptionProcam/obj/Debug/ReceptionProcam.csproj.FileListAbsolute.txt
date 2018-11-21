@@ -162,4 +162,3 @@ D:\Kavan\Project\ReceptionProcam\ReceptionProcam\ReceptionProcam\bin\Microsoft.O
 D:\Kavan\Project\ReceptionProcam\ReceptionProcam\ReceptionProcam\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 D:\Kavan\Project\ReceptionProcam\ReceptionProcam\ReceptionProcam\obj\Debug\ReceptionProcam.dll
 D:\Kavan\Project\ReceptionProcam\ReceptionProcam\ReceptionProcam\obj\Debug\ReceptionProcam.pdb
-D:\Kavan\Project\ReceptionProcam\ReceptionProcam\ReceptionProcam\obj\Debug\ReceptionProcam.csprojResolveAssemblyReference.cache

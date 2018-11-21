@@ -44,7 +44,8 @@ $(document).ready(function () {
     $('#txtDOB').datepicker({
         dateFormat: 'dd-mm-yy',
         autoclose: true,
-        changeTime:false
+        changeTime: false,
+        endDate: new Date()
     });
 
 });
