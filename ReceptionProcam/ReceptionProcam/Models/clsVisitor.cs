@@ -14,7 +14,7 @@ namespace ReceptionProcam.Models
         
         [Required(ErrorMessage = "* Please enter Name")]
         [DisplayName("Name")]
-        [RegularExpression("[a-zA-Z]*")]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
         public string Name { get; set; }
 
         [DisplayName("Date of Birth")]
