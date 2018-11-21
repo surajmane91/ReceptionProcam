@@ -1,36 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="DBNCSVisitorModelStoreContainer" CdmEntityContainer="DBNCSVisitorEntities">
-    <EntitySetMapping Name="tblVisitors">
-      <EntityTypeMapping TypeName="DBNCSVisitorModel.tblVisitor">
-        <MappingFragment StoreEntitySet="tblVisitor">
-          <ScalarProperty Name="DOB" ColumnName="DOB" />
-          <ScalarProperty Name="ValidUpto" ColumnName="ValidUpto" />
-          <ScalarProperty Name="AssetId" ColumnName="AssetId" />
-          <ScalarProperty Name="EmailId" ColumnName="EmailId" />
-          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
-          <ScalarProperty Name="GovId" ColumnName="GovId" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="VisitorId" ColumnName="VisitorId" />
-          <ScalarProperty Name="First_Name" ColumnName="First_Name" />
-          <ScalarProperty Name="Middel_Name" ColumnName="Middel_Name" />
-          <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
-          <ScalarProperty Name="Form" ColumnName="Form" />
-          <ScalarProperty Name="ToMeet" ColumnName="ToMeet" />
-          <ScalarProperty Name="SubLocation" ColumnName="SubLocation" />
-          <ScalarProperty Name="Building" ColumnName="Building" />
-          <ScalarProperty Name="Gate" ColumnName="Gate" />
-          <ScalarProperty Name="Purpose" ColumnName="Purpose" />
-          <ScalarProperty Name="TimeIn" ColumnName="TimeIn" />
-          <ScalarProperty Name="Remark" ColumnName="Remark" />
-          <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="uspGetVisitorPerDayCount1" FunctionName="DBNCSVisitorModel.Store.uspGetVisitorPerDayCount">
       <ResultMapping>
         <ComplexTypeMapping TypeName="DBNCSVisitorModel.uspGetVisitorPerDayCount1_Result">
@@ -39,5 +9,33 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <EntitySetMapping Name="tblVisitors">
+      <EntityTypeMapping TypeName="DBNCSVisitorModel.tblVisitor">
+        <MappingFragment StoreEntitySet="tblVisitor">
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="ValidUpto" ColumnName="ValidUpto" />
+          <ScalarProperty Name="TimeIn" ColumnName="TimeIn" />
+          <ScalarProperty Name="Purpose" ColumnName="Purpose" />
+          <ScalarProperty Name="Gate" ColumnName="Gate" />
+          <ScalarProperty Name="Building" ColumnName="Building" />
+          <ScalarProperty Name="SubLocation" ColumnName="SubLocation" />
+          <ScalarProperty Name="ToMeet" ColumnName="ToMeet" />
+          <ScalarProperty Name="Form" ColumnName="Form" />
+          <ScalarProperty Name="AssetId" ColumnName="AssetId" />
+          <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+          <ScalarProperty Name="GovId" ColumnName="GovId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="VisitorId" ColumnName="VisitorId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

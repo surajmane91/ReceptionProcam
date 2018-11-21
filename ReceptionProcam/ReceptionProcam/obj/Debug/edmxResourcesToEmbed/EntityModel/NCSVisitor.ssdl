@@ -6,13 +6,10 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="VisitorId" Type="nvarchar" MaxLength="20" />
-    <Property Name="First_Name" Type="nvarchar" MaxLength="50" />
-    <Property Name="Middel_Name" Type="nvarchar" MaxLength="50" />
-    <Property Name="Last_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
     <Property Name="GovId" Type="nvarchar" MaxLength="50" />
     <Property Name="MobileNo" Type="nchar" MaxLength="10" />
     <Property Name="EmailId" Type="nvarchar" MaxLength="50" />
-    <Property Name="DOB" Type="nvarchar" MaxLength="20" />
     <Property Name="AssetId" Type="nvarchar" MaxLength="50" />
     <Property Name="Form" Type="nvarchar" MaxLength="50" />
     <Property Name="ToMeet" Type="nvarchar" MaxLength="50" />
@@ -28,6 +25,7 @@
     <Property Name="CreatedDate" Type="date" />
     <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
     <Property Name="ModifiedDate" Type="date" />
+    <Property Name="DOB" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <Function Name="uspGetVisitorPerDayCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="DBNCSVisitorModelStoreContainer">

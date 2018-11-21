@@ -3,7 +3,7 @@
 {
     <script src="~/Scripts/jquery.webcam.js"></script>
     <script src="~/Scripts/visitor.js"></script>
-    @Scripts.Render("~/bundles/jqueryval")
+   
 }
 <script>
     $(document).ready(function () {
@@ -28,6 +28,14 @@
             changeYear: true,
             yearRange: "-60:+0",
 
+        });
+
+    });
+    $(document).ready(function () {
+        $('#txtDOB').datepicker({
+            dateFormat: 'dd-mm-yy',
+            autoclose: true,
+            changeTime:false
         });
 
     });
@@ -57,6 +65,30 @@
              Text = "Gate 03 - RECEPITON ",
              Value = "Gate 03 - RECEPITON"
          });
+}
+@{
+    List<SelectListItem> listGate = new List<SelectListItem>();
+    listGate.Add(new SelectListItem
+         {
+             Text = "Adhaar Card",
+             Value = "1",
+             Selected = true
+         });
+    listGate.Add(new SelectListItem
+         {
+             Text = "Pan Card",
+             Value = "2"
+         });
+    listGate.Add(new SelectListItem
+         {
+             Text = "Voter Card",
+             Value = "3"
+         });
+    listGate.Add(new SelectListItem
+    {
+        Text = "Passport",
+        Value = "4"
+    });
 }
 @if (TempData["Success"] != null)
 {
@@ -102,21 +134,9 @@
                     @Html.EditorFor(model => model.VisitorId, new { htmlAttributes = new { @class = "form-control m-input", @placeholder = "NCSIPUN201801" } })
                 </div>
                 <div class="col-lg-6">
-                    @Html.LabelFor(model => model.First_Name, htmlAttributes: new { })
-                    @Html.EditorFor(model => model.First_Name, new { htmlAttributes = new { @class = "form-control m-input", @placeholder = "First Name" } })
-                    <p class="help-block">@Html.ValidationMessageFor(m => m.First_Name, "", new { @class = "text-danger" })</p>
-                </div>
-            </div>
-            <div class="form-group m-form__group row">
-                <div class="col-lg-6">
-                    @Html.LabelFor(model => model.Middel_Name, htmlAttributes: new { })
-                    @Html.EditorFor(model => model.Middel_Name, new { htmlAttributes = new { @class = "form-control m-input", @placeholder = "Middel Name" } })
-                    <p class="help-block">@Html.ValidationMessageFor(m => m.Middel_Name, "", new { @class = "text-danger" })</p>
-                </div>
-                <div class="col-lg-6">
-                    @Html.LabelFor(model => model.Last_Name, htmlAttributes: new { })
-                    @Html.EditorFor(model => model.Last_Name, new { htmlAttributes = new { @class = "form-control m-input", @placeholder = "Last Name" } })
-                    <p class="help-block">@Html.ValidationMessageFor(m => m.Last_Name, "", new { @class = "text-danger" })</p>
+                    @Html.LabelFor(model => model.Name, htmlAttributes: new { })
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control m-input", @placeholder = "Name" } })
+                    <p class="help-block">@Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })</p>
                 </div>
             </div>
             <div class="form-group m-form__group row">
@@ -129,6 +149,19 @@
                     @Html.LabelFor(model => model.Email, htmlAttributes: new { })
                     @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control m-input", @placeholder = "Email" } })
                     <p class="help-block">@Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })</p>
+                </div>
+            </div>
+            <div class="form-group m-form__group row">
+                <div class="col-lg-6">
+                    @Html.LabelFor(model => model.GovId, htmlAttributes: new { })
+                    @*@Html.EditorFor(model => model.Gate, new { htmlAttributes = new { @class = "form-control m-input", @placeholder = "Gate" } })*@
+                    @Html.DropDownListFor(m => m.GovId, listGate, "-- Select Gov Id Proof --", new {  @class = "form-control m-input" })
+                    <p class="help-block">@Html.ValidationMessageFor(m => m.GovId, "", new { @class = "text-danger" })</p>
+                </div>
+                <div class="col-lg-6">
+                    @Html.LabelFor(model => model.DOB, htmlAttributes: new { })
+                    @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @Id = "txtDOB", @class = "form-control m-input" } })
+                    <p class="help-block">@Html.ValidationMessageFor(m => m.DOB, "", new { @class = "text-danger" })</p>
                 </div>
             </div>
             <div class="form-group m-form__group row">
@@ -200,7 +233,7 @@
             <div class="m-form__actions m-form__actions--solid">
                 <div class="row">
                     
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary" >
                             Submit
                         </button>
                     &nbsp;&nbsp;

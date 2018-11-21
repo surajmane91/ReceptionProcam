@@ -2,12 +2,10 @@
 @section scripts
 {
 
-    @*<script src="~/Scripts/jquery-3.0.0.min.js"></script>*@
+    
     <script src="~/Scripts/jquery.webcam.js"></script>
     <script src="~/Scripts/visitor.js"></script>
-    @*<link href="~/Content/Site.css" rel="stylesheet" />*@
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    }
 
 @{
     List<SelectListItem> listItems = new List<SelectListItem>();
@@ -58,20 +56,14 @@
 
     <p class="alert alert-success" id="successMessage">@TempData["Success"]</p>
 }
-<script>
-    function onchangeevent() {
-        $('#txtid').val('sam');
-    }
 
-    function x() {
-        alert('@Session["CapturedImage"]')
-    }
-
-</script>
 @using (Html.BeginForm(new { @class = "m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed", role = "form" }))
 {
     @Html.AntiForgeryToken()
 
+    <!--Capture Camera test-->
+    
+    
     		<!--begin::Portlet-->
     <div class="m-portlet">
         <div class="m-portlet__head">
@@ -91,46 +83,24 @@
 
         <div class="m-portlet__body">
             <div class="form-group m-form__group row">
-                <div id="webcam" class="col-lg-2">
+                <div id="webcam" class="col-lg-2" style="padding:10px">
 
                 </div>
-                <div class="col-lg-2 offset-2 camDivsty">
+                <div class="col-lg-2 offset-2 camDivsty" style="padding:10px">
                     <input type="button" class="btn btn-primary" value="Capture" onclick="Capture();" />
                 </div>
-
-                <div class="col-lg-2 offset-2">
-                    <img src=@Session["CapturedImage"].ToString() alt="visitor Image" />
-                </div>
+                <div class="col-lg-2"><img id="imgCapture" style="visibility: hidden;height:155px;width:200px; padding:10px" /></div>
             </div>
-
-            @*<div id="imageDiv">
-                    <img src=@Session["ImagePath"].ToString() alt="" />
-                </div>*@
             <br>
-            @*<div class="form-group m-form__group row">
-                    @Html.HiddenFor(model => model.ImagePath, htmlAttributes : new { @Id = "ImageId" } )
-                </div>*@
             <div class="form-group m-form__group row">
                 <div class="col-lg-6">
                     @Html.LabelFor(model => model.VisitorId, htmlAttributes: new { })
                     @Html.EditorFor(model => model.VisitorId, new { htmlAttributes = new { @class = "form-control m-input", @placeholder = "NCSIPUN201801", @readonly = "readonly" } })
                 </div>
                 <div class="col-lg-6">
-                    @Html.LabelFor(model => model.First_Name, htmlAttributes: new { })
-                    @Html.EditorFor(model => model.First_Name, new { htmlAttributes = new { autocomplete = "off", @class = "form-control m-input", @placeholder = "First Name", @style = "text-transform:uppercase" } })
-                    <p class="help-block">@Html.ValidationMessageFor(m => m.First_Name, "", new { @class = "text-danger" })</p>
-                </div>
-            </div>
-            <div class="form-group m-form__group row">
-                <div class="col-lg-6">
-                    @Html.LabelFor(model => model.Middel_Name, htmlAttributes: new { })
-                    @Html.EditorFor(model => model.Middel_Name, new { htmlAttributes = new { autocomplete = "off", @class = "form-control m-input", @placeholder = "Middle Name", @style = "text-transform:uppercase" } })
-                    <p class="help-block">@Html.ValidationMessageFor(m => m.Middel_Name, "", new { @class = "text-danger" })</p>
-                </div>
-                <div class="col-lg-6">
-                    @Html.LabelFor(model => model.Last_Name, htmlAttributes: new { })
-                    @Html.EditorFor(model => model.Last_Name, new { htmlAttributes = new { autocomplete = "off", @class = "form-control m-input", @placeholder = "Last Name", @style = "text-transform:uppercase" } })
-                    <p class="help-block">@Html.ValidationMessageFor(m => m.Last_Name, "", new { @class = "text-danger" })</p>
+                    @Html.LabelFor(model => model.Name, htmlAttributes: new { })
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { autocomplete = "off", @class = "form-control m-input", @placeholder = "Name", @style = "text-transform:uppercase" } })
+                    <p class="help-block">@Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })</p>
                 </div>
             </div>
             <div class="form-group m-form__group row">
@@ -231,7 +201,7 @@
                         <button type="submit" class="btn btn-primary">
                             Submit
                         </button>
-                        <button type="reset" class="btn btn-secondary">
+                        <button type="reset" class="btn btn-secondary" onclick="@("window.location.href='" + @Url.Action("VisitorDetails", "Visitor") + "'");">
                             Cancel
                         </button>
                     </div>

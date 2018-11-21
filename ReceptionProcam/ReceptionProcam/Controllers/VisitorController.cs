@@ -35,7 +35,7 @@ namespace ReceptionProcam.Controllers
                 Session["CapturedImage"] = "";
                 clsVisitor personal = new clsVisitor();
                 var lastVisitorPassNumber = objVisEnti.tblVisitors.OrderByDescending(c => c.Id).FirstOrDefault();
-                var date = DateTime.Now.ToString("yyyy");
+                var date = DateTime.Now.ToString("yyyyMMdd");
                 personal.ImagePath = string.Empty;
                 if (lastVisitorPassNumber == null)
                 {
@@ -90,13 +90,20 @@ namespace ReceptionProcam.Controllers
                             System.IO.File.WriteAllBytes(Server.MapPath(imagePath), ConvertHexToBytes(hexString));
                             Session["CapturedImage"] = VirtualPathUtility.ToAbsolute(imagePath);
                         }
+                        
                     }
                 }
 
                 return View();
             }
         }
-
+        [HttpPost]
+        public string GetCapture()
+        {
+            string url = Session["CapturedImage"].ToString();
+            //Session["CapturedImage"] = null;
+            return url;
+        }
         private static byte[] ConvertHexToBytes(string hex)
         {
             byte[] bytes = new byte[hex.Length / 2];
@@ -125,9 +132,7 @@ namespace ReceptionProcam.Controllers
                         // Purpose, TimeIn, Remark, ImagePath, CreatedBy, CreatedDate, ModifiedBy, ModifiedDate
                         //Random rmd = new Random(9999);
                         dbVis.VisitorId = objVisitor.VisitorId;
-                        dbVis.First_Name = objVisitor.First_Name;
-                        dbVis.Middel_Name = objVisitor.Middel_Name;
-                        dbVis.Last_Name = objVisitor.Last_Name;
+                        dbVis.Name = objVisitor.Name;
                         dbVis.EmailId = objVisitor.Email;
                         dbVis.MobileNo = objVisitor.MobileNo.ToString();
                         dbVis.AssetId = objVisitor.AssetId.ToString();
@@ -142,7 +147,7 @@ namespace ReceptionProcam.Controllers
                         dbVis.Remark = objVisitor.Remark;
                         dbVis.ImagePath = Session["CapturedImage"].ToString();
                         dbVis.GovId = objVisitor.GovId.ToString();
-                        dbVis.DOB = Convert.ToString(objVisitor.DOB);
+                        dbVis.DOB = objVisitor.DOB.ToString();
                         dbVis.CreatedBy = objVisitor.CreatedBy;
                         dbVis.CreatedDate = Convert.ToDateTime(System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                         objVisEnti.tblVisitors.Add(dbVis);
@@ -176,7 +181,7 @@ namespace ReceptionProcam.Controllers
             try
             {
                 var VisData = objVisEnti.tblVisitors.Where(s => s.Id == Id).FirstOrDefault();
-                clsVisitor VisDtls = new clsVisitor { Id = VisData.Id, VisitorId = VisData.VisitorId, First_Name = VisData.First_Name, Middel_Name = VisData.Middel_Name, Last_Name = VisData.Last_Name, Form = VisData.Form, ToMeet = VisData.ToMeet, SubLocation = VisData.SubLocation, AssetId = VisData.AssetId, MobileNo = VisData.MobileNo, Email = VisData.EmailId, ValidUpto = VisData.ValidUpto, Building = VisData.Building, Gate = VisData.Gate, Purpose = VisData.Purpose, TimeIn = VisData.TimeIn, Remark = VisData.Remark, ImagePath = VisData.ImagePath, CreatedBy = VisData.CreatedBy, CreatedDate = VisData.CreatedDate.ToString(), ModifiedBy = VisData.ModifiedBy, ModifiedDate = VisData.ModifiedDate.ToString() };
+                clsVisitor VisDtls = new clsVisitor { Id = VisData.Id, VisitorId = VisData.VisitorId, Name = VisData.Name, Form = VisData.Form, ToMeet = VisData.ToMeet, SubLocation = VisData.SubLocation, AssetId = VisData.AssetId, MobileNo = VisData.MobileNo, Email = VisData.EmailId, ValidUpto = VisData.ValidUpto, Building = VisData.Building, Gate = VisData.Gate, Purpose = VisData.Purpose, TimeIn = VisData.TimeIn, Remark = VisData.Remark, ImagePath = VisData.ImagePath, CreatedBy = VisData.CreatedBy, CreatedDate = VisData.CreatedDate.ToString(), ModifiedBy = VisData.ModifiedBy, ModifiedDate = VisData.ModifiedDate.ToString() };
                 return View(VisDtls);
             }
             catch (Exception)
@@ -200,9 +205,7 @@ namespace ReceptionProcam.Controllers
                     {
 
                         dbVis.VisitorId = objVisitor.VisitorId;
-                        dbVis.First_Name = objVisitor.First_Name;
-                        dbVis.Middel_Name = objVisitor.Middel_Name;
-                        dbVis.Last_Name = objVisitor.Last_Name;
+                        dbVis.Name = objVisitor.Name;
                         dbVis.EmailId = objVisitor.Email;
                         dbVis.MobileNo = objVisitor.MobileNo.ToString();
                         dbVis.AssetId = objVisitor.AssetId.ToString();
@@ -219,18 +222,18 @@ namespace ReceptionProcam.Controllers
                         dbVis.ModifiedBy = objVisitor.CreatedBy;
                         dbVis.ModifiedDate = Convert.ToDateTime(System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                         dbVis.GovId = objVisitor.GovId.ToString();
-                        dbVis.DOB = Convert.ToString(objVisitor.DOB);
+                        dbVis.DOB = objVisitor.DOB.ToString();
                         objVisEnti.tblVisitors.Add(dbVis);
 
                         objVisEnti.tblVisitors.Attach(dbVis);
                         objVisEnti.Entry(dbVis).State = EntityState.Modified;
                         objVisEnti.SaveChanges();
                         TempData["Success"] = "Visitor updated Successfully!";
-                        return RedirectToAction("CreateVisitor");
+                        return RedirectToAction("VisitorDetails");
                     }
                     else
                     {
-                        return RedirectToAction("CreateVisitor");
+                        return RedirectToAction("VisitorDetails");
                     }
                 }
                 else
@@ -272,35 +275,6 @@ namespace ReceptionProcam.Controllers
             {
                 var AllVisitors = objVisEnti.tblVisitors.ToList();
                 ViewBag.AllVisitorsDetalis = AllVisitors;
-
-
-                //var query = (from v in objVisEnti.tblVisitors
-                //             select new
-                //             {
-                //                 Id = v.Id,
-                //                 VisitorId = v.VisitorId,
-                //                 Name = v.First_Name + " " + v.Middel_Name + " " + v.Last_Name,
-                //                 GovId = v.GovId,
-                //                 MobileNo = v.MobileNo,
-                //                 EmailId = v.EmailId,
-                //                 AssetId = v.AssetId,
-                //                 Form = v.Form,
-                //                 ToMeet = v.ToMeet,
-                //                 SubLocation = v.SubLocation,
-                //                 Building = v.Building,
-                //                 Gate = v.Gate,
-                //                 Purpose = v.Purpose,
-                //                 TimeIn = v.TimeIn,
-                //                 ValidUpto = v.ValidUpto,
-                //                 Remark = v.Remark,
-                //                 ImagePath = v.ImagePath,
-                //                 CreatedBy = v.CreatedBy,
-                //                 CreatedDate = v.CreatedDate,
-                //                 ModifiedBy = v.ModifiedBy,
-                //                 ModifiedDate = v.ModifiedDate
-                //             }).ToList();
-                // ViewBag.AllVisitorsDetalis = query;
-
             }
             catch (Exception ex)
             {
@@ -328,7 +302,7 @@ namespace ReceptionProcam.Controllers
             try
             {
                 var VisData = objVisEnti.tblVisitors.Where(s => s.Id == Id).FirstOrDefault();
-                clsVisitor VisDtls = new clsVisitor { Id = VisData.Id, VisitorId = VisData.VisitorId, First_Name = VisData.First_Name, Middel_Name = VisData.Middel_Name, Last_Name = VisData.Last_Name, Form = VisData.Form, ToMeet = VisData.ToMeet, SubLocation = VisData.SubLocation, AssetId = VisData.AssetId, MobileNo = VisData.MobileNo, Email = VisData.EmailId, ValidUpto = VisData.ValidUpto, Building = VisData.Building, Gate = VisData.Gate, Purpose = VisData.Purpose, TimeIn = VisData.TimeIn, Remark = VisData.Remark, ImagePath = VisData.ImagePath, CreatedBy = VisData.CreatedBy, CreatedDate = VisData.CreatedDate.ToString(), ModifiedBy = VisData.ModifiedBy, ModifiedDate = VisData.ModifiedDate.ToString() };
+                clsVisitor VisDtls = new clsVisitor { Id = VisData.Id, VisitorId = VisData.VisitorId, Name = VisData.Name,Form = VisData.Form, ToMeet = VisData.ToMeet, SubLocation = VisData.SubLocation, AssetId = VisData.AssetId, MobileNo = VisData.MobileNo, Email = VisData.EmailId, ValidUpto = VisData.ValidUpto, Building = VisData.Building, Gate = VisData.Gate, Purpose = VisData.Purpose, TimeIn = VisData.TimeIn, Remark = VisData.Remark, ImagePath = VisData.ImagePath, CreatedBy = VisData.CreatedBy, CreatedDate = VisData.CreatedDate.ToString(), ModifiedBy = VisData.ModifiedBy, ModifiedDate = VisData.ModifiedDate.ToString() };
                 return View(VisDtls);
             }
             catch (Exception ex)

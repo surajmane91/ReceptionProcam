@@ -1,25 +1,7 @@
 ﻿@model ReceptionProcam.Models.clsVisitor
-<script language="javascript">
-    function printdiv(printpage) {
-        debugger;
-        //var st = document.getElementById(printpage);
-        //var WinPrint = window.open('', '', 'left=0,top=0,width=600,height=400,toolbar=1,scrollbars=1,status=0');
-        //WinPrint.document.write(st.innerHTML);
-        //WinPrint.print();
-        var newstr = document.all.item(printpage).innerHTML;
-        var oldstr = document.body.innerHTML;
-        document.body.innerHTML = newstr;
-        window.print();
-        document.body.innerHTML = oldstr;
-           return false;
+<script src="~/Scripts/visitor.js"></script>
 
-    
-    }
-
-
-
-</script>
-@using (Html.BeginForm(new { @class = "m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed", role = "form" }))
+@using (Html.BeginForm(new {  role = "form" }))
 {
     @Html.AntiForgeryToken()
 

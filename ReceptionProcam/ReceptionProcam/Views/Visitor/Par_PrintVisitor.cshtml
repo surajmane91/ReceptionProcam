@@ -1,24 +1,7 @@
-﻿@{
-    Layout = null;
-}
-@model ReceptionProcam.Models.clsVisitor
-<html lang="en">
-<head>
-    <title>
-    </title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <script src="https://code.jquery.com/jquery-1.12.4.js">
-    </script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js">
-    </script>
-</head>
-<body>
-    <br />
-    @*<div class="container">*@
-    <div class="panel panel-primary" style="width:420px;height:260px;margin:0px auto">
-        <div class="panel-body">
+﻿@model ReceptionProcam.Models.clsVisitor
+
+    <div class="panel panel-primary" style="width:370px;height:270px;margin:0px auto;border:1px solid black;">
+        <div class="panel-body" style="margin-top:1%;margin-left:1%;">
             <form data-toggle="validator" role="form">
                 <table style="font-size:10px">
                     <tr style="height:3px">
@@ -36,7 +19,7 @@
                         </td>
                         <td>
                             <label style="font-weight:bold">Name:</label>
-                            <label style="font-weight:bold">@Model.First_Name @Model.Middel_Name @Model.Last_Name</label>
+                            <label style="font-weight:bold">@Model.Name</label>
                         </td>
 
                     </tr>
@@ -80,7 +63,6 @@
                             <label style="font-weight:bold">Gate:</label>
                             <label style="font-weight:bold">@Model.Gate</label>
                         </td>
-
                         <td>
 
                             <label style="font-weight:bold">Asset Id:</label>
@@ -101,16 +83,14 @@
                             <label style="font-weight:bold">@Model.Remark</label>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td colspan="2" style="font-size:12px; font-weight:bold; padding-top:5px">
-                            Visitor sign &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Security sign
-                        </td>
+                        <td colspan="1" style="font-size:12px; font-weight:bold; padding-top:5px">
+                            Visitor sign &nbsp;&nbsp;&nbsp;&nbsp;Security sign 
+                           </td>
                     </tr>
                 </table>
             </form>
         </div>
     </div>
-    @*</div>*@
-</body>
-</html>
+    

@@ -9,13 +9,14 @@ $(function () {
 
             $.ajax({
                 type: "POST",
-                url: '/Visitor/GetCapture',
+                url:'/Visitor/GetCapture',
                 data: '',
                 contentType: "application/json; charset=utf-8",
-                dataType: "json",
+                dataType: "text",
                 success: function (r) {
                     $("#imgCapture").css("visibility", "visible");
                     $("#imgCapture").attr("src", r);
+                    
                 },
                 failure: function (response) {
                     alert(response.d);
@@ -34,30 +35,43 @@ function Capture() {
 function displayToastr() {
     toastr.success('Image Captured');
 }
-function show() {
-    document.getElementById('imageDiv').style.maxHeight = "200px";
-    var images = document.querySelector("#imageDiv img");
-    images[0].src = document.getElementById("ImageId");
-    
-}
-
-
 
 function Cancel() {
     window.location = '';
 }
 
 $(document).ready(function () {
-    $('#txtDOB').datetimepicker({
+    $('#txtDOB').datepicker({
         dateFormat: 'dd-mm-yy',
+        autoclose: true,
         changeTime:false
     });
 
 });
 
+//function printdiv(printpage) {
+//    var newstr = document.all.item(printpage).innerHTML;
+//    var oldstr = document.body.innerHTML;
+//    document.body.innerHTML = newstr;
+//    window.print();
+//    document.body.innerHTML = oldstr;
+//    return false;
+//}
+function printdiv(printpage) {
+    var content = document.all.item(printpage).innerHTML;
+    var mywindow = window.open('', 'Print', 'height=600,width=800');
+    mywindow.document.write(content);
+    mywindow.document.close();
+    mywindow.focus()
+    mywindow.print();
+    mywindow.close();
+    return true;
+}
 
 $(document).ready(function () {
     $('#txtValidUpto').datetimepicker({
+        autoclose: true,
+        startDate: new Date()
     });
 
 });
@@ -65,6 +79,8 @@ $(document).ready(function () {
 $(document).ready(function () {
 
     $('#txtInTime').datetimepicker({
+        autoclose:true,
+        startDate: new Date()
     });
 
 });
@@ -75,12 +91,10 @@ $(document).ready(function () {
         var endDate = $('#txtValidUpto').val();
 
         if (Date.parse(startDate) >= Date.parse(endDate)) {
-            alert("Validity Date and time is older than in Date time");
-
+            toastr.warning("ValidUpto date  always greater than InTime Date.");
             $('#txtValidUpto').val("");
         }
         
     });
 });
-
 

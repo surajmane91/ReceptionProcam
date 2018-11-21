@@ -13,15 +13,9 @@ namespace ReceptionProcam.Models
         [Editable(true)]
         public string VisitorId { get; set; }
         
-        [Required(ErrorMessage = "* Please enter First Name")]
-        [DisplayName("First Name")]
-        public string First_Name { get; set; }
-        [Required(ErrorMessage = "* Please enter Middle Name")]
-        [DisplayName("Middle Name")]
-        public string Middel_Name { get; set; }
-        [DisplayName("Last Name")]
-        [Required(ErrorMessage = "* Please enter Last Name")]
-        public string Last_Name { get; set; }
+        [Required(ErrorMessage = "* Please enter Name")]
+        [DisplayName("Name")]
+        public string Name { get; set; }
 
         [DisplayName("Date of Birth")]
         [Required(ErrorMessage = "* Please enter Date of Birth")]

@@ -16,9 +16,11 @@ namespace ReceptionProcam.EntityModel
     {
         public int Id { get; set; }
         public string VisitorId { get; set; }
-        public string First_Name { get; set; }
-        public string Middel_Name { get; set; }
-        public string Last_Name { get; set; }
+        public string Name { get; set; }
+        public string GovId { get; set; }
+        public string MobileNo { get; set; }
+        public string EmailId { get; set; }
+        public string AssetId { get; set; }
         public string Form { get; set; }
         public string ToMeet { get; set; }
         public string SubLocation { get; set; }
@@ -26,17 +28,13 @@ namespace ReceptionProcam.EntityModel
         public string Gate { get; set; }
         public string Purpose { get; set; }
         public string TimeIn { get; set; }
+        public string ValidUpto { get; set; }
         public string Remark { get; set; }
         public string ImagePath { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
-        public string GovId { get; set; }
-        public string MobileNo { get; set; }
-        public string EmailId { get; set; }
-        public string AssetId { get; set; }
-        public string ValidUpto { get; set; }
         public string DOB { get; set; }
     }
 }

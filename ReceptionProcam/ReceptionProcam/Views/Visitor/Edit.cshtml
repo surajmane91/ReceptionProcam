@@ -35,8 +35,7 @@
                     <thead>
                         <tr>
                             <th>@Html.DisplayName("Visitor Id")</th>
-                            <th>@Html.DisplayName("First Name")</th>
-                            <th>@Html.DisplayName("Last Name")</th>
+                            <th>@Html.DisplayName("Name")</th>
                             <th>@Html.DisplayName("To Meet")</th>
                             <th>@Html.DisplayName("Purpose")</th>
                             <th>
@@ -52,8 +51,7 @@
                         {
                             <tr>
                                 <td>@item.VisitorId</td>
-                                <td>@item.First_Name</td>
-                                <td>@item.Last_Name</td>
+                                <td>@item.Name</td>
                                 <td>@item.ToMeet</td>
                                 <td>@item.Purpose</td>
                                 <td>@Html.ActionLink("Details", "EditVisitor", new { id = item.VisitorId })</td>

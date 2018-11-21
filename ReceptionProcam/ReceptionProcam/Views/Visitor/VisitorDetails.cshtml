@@ -38,8 +38,8 @@
             <table class="table table-striped- table-bordered table-hover table-checkable" id="Visitors">
                 <thead>
                     <tr>
-                        <th> @Html.DisplayName("Visitor Image")</th>
-                        <th> @Html.DisplayName("Visitor Id")</th>
+                        <th>@Html.DisplayName("Visitor Image")</th>
+                        <th>@Html.DisplayName("Visitor Id")</th>
                         <th>@Html.DisplayName("Full Name")</th>
                         <th>@Html.DisplayName("From")</th>
                         <th>@Html.DisplayName("To Meet")</th>
@@ -58,7 +58,7 @@
                         <tr>
                             <td><img src="@Url.Content(@item.ImagePath)" alt="Image" style="width:60%; height:auto"/></td>
                             <td>@item.VisitorId</td>
-                            <td>@item.First_Name  @item.Middel_Name   @item.Last_Name</td>
+                            <td>@item.Name</td>
                             <td>@item.Form</td>
                             <td>@item.ToMeet</td>
                             <td>@item.Purpose</td>
