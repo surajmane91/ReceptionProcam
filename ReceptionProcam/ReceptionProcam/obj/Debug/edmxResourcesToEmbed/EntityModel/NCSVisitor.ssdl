@@ -6,9 +6,9 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="VisitorId" Type="nvarchar" MaxLength="20" />
-    <Property Name="Name" Type="nvarchar" MaxLength="500" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
     <Property Name="GovId" Type="nvarchar" MaxLength="50" />
-    <Property Name="MobileNo" Type="nchar" MaxLength="15" />
+    <Property Name="MobileNo" Type="nvarchar" MaxLength="50" />
     <Property Name="EmailId" Type="nvarchar" MaxLength="50" />
     <Property Name="AssetId" Type="nvarchar" MaxLength="50" />
     <Property Name="Form" Type="nvarchar" MaxLength="50" />

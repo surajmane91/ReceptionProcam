@@ -11,9 +11,9 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="VisitorId" Type="nvarchar" MaxLength="20" />
-          <Property Name="Name" Type="nvarchar" MaxLength="500" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="GovId" Type="nvarchar" MaxLength="50" />
-          <Property Name="MobileNo" Type="nchar" MaxLength="15" />
+          <Property Name="MobileNo" Type="nvarchar" MaxLength="50" />
           <Property Name="EmailId" Type="nvarchar" MaxLength="50" />
           <Property Name="AssetId" Type="nvarchar" MaxLength="50" />
           <Property Name="Form" Type="nvarchar" MaxLength="50" />
@@ -59,9 +59,9 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="VisitorId" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="GovId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MobileNo" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="MobileNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="EmailId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AssetId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Form" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />

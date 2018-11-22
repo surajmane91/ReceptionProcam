@@ -144,7 +144,7 @@
                 </div>
                 <div class="col-lg-6">
                     @Html.LabelFor(model => model.Name, htmlAttributes: new { })<span class="text-danger">*</span>
-                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { autocomplete = "off", @class = "form-control m-input", @placeholder = "Name", @style = "text-transform:uppercase",@onclick = "Check();" } })
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { autocomplete = "off", @class = "form-control m-input", @placeholder = "Name", @style = "text-transform:uppercase" } })
                     <p class="help-block">@Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })</p>
                 </div>
             </div>
