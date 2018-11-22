@@ -59,44 +59,43 @@ namespace ReceptionProcam.Controllers
         public ActionResult Capture()
         {
 
-            if (Session["CapturedImage"].ToString() == "")
+            if (Request.InputStream.Length > 0)
             {
-                if (Request.InputStream.Length > 0)
+                using (StreamReader reader = new StreamReader(Request.InputStream))
                 {
-                    using (StreamReader reader = new StreamReader(Request.InputStream))
-                    {
-                        string hexString = Server.UrlEncode(reader.ReadToEnd());
-                        string imageName = DateTime.Now.ToString("ddMMyyhhmmsstt");
-                        string imagePath = string.Format("~/VisitorImage/{0}.png", imageName);
-                        System.IO.File.WriteAllBytes(Server.MapPath(imagePath), ConvertHexToBytes(hexString));
-                        Session["CapturedImage"] = VirtualPathUtility.ToAbsolute(imagePath);
+                    string hexString = Server.UrlEncode(reader.ReadToEnd());
+                    string imageName = DateTime.Now.ToString("ddMMyyhhmmsstt");
+                    string imagePath = string.Format("~/VisitorImage/{0}.png", imageName);
+                    System.IO.File.WriteAllBytes(Server.MapPath(imagePath), ConvertHexToBytes(hexString));
+                    Session["CapturedImage"] = VirtualPathUtility.ToAbsolute(imagePath);
 
-                    }
                 }
-
-                return View();
             }
-            else
-            {
-                if (System.IO.File.Exists(Session["CapturedImage"].ToString()))
-                {
-                    System.IO.File.Delete(Session["CapturedImage"].ToString());
-                    if (Request.InputStream.Length > 0)
-                    {
-                        using (StreamReader reader = new StreamReader(Request.InputStream))
-                        {
-                            string hexString = Server.UrlEncode(reader.ReadToEnd());
-                            string imageName = DateTime.Now.ToString("ddMMyyhhmmsstt");
-                            string imagePath = string.Format("~/VisitorImage/{0}.png", imageName);
-                            System.IO.File.WriteAllBytes(Server.MapPath(imagePath), ConvertHexToBytes(hexString));
-                            Session["CapturedImage"] = VirtualPathUtility.ToAbsolute(imagePath);
-                        }
-                        
-                    }
-                }
 
-                return View();
-            }
+            return View();
+
+            //else
+            //{
+            //    string fp = "." + Session["CapturedImage"].ToString();
+            //    if (System.IO.File.Exists(fp))
+            //    {
+            //        System.IO.File.Delete(fp);
+            //        if (Request.InputStream.Length > 0)
+            //        {
+            //            using (StreamReader reader = new StreamReader(Request.InputStream))
+            //            {
+            //                string hexString = Server.UrlEncode(reader.ReadToEnd());
+            //                string imageName = DateTime.Now.ToString("ddMMyyhhmmsstt");
+            //                string imagePath = string.Format("~/VisitorImage/{0}.png", imageName);
+            //                System.IO.File.WriteAllBytes(Server.MapPath(imagePath), ConvertHexToBytes(hexString));
+            //                Session["CapturedImage"] = VirtualPathUtility.ToAbsolute(imagePath);
+            //            }
+
+            //        }
+            //    }
+
+            //return View();
+            //}
         }
         [HttpPost]
         public string GetCapture()
@@ -164,25 +163,25 @@ namespace ReceptionProcam.Controllers
                     return View(objVisitor);
                 }
             }
-            //catch (Exception ex)
-            //{
-            //    Console.WriteLine("Save" + ex.Message);
-            //    return View(objVisitor);
-            //}
-            catch (DbEntityValidationException e)
+            catch (Exception ex)
             {
-                foreach (var eve in e.EntityValidationErrors)
-                {
-                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                    foreach (var ve in eve.ValidationErrors)
-                    {
-                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                            ve.PropertyName, ve.ErrorMessage);
-                    }
-                }
-                throw;
+                Console.WriteLine("Save" + ex.Message);
+                return View(objVisitor);
             }
+            //catch (DbEntityValidationException e)
+            //{
+            //    foreach (var eve in e.EntityValidationErrors)
+            //    {
+            //        Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+            //            eve.Entry.Entity.GetType().Name, eve.Entry.State);
+            //        foreach (var ve in eve.ValidationErrors)
+            //        {
+            //            Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+            //                ve.PropertyName, ve.ErrorMessage);
+            //        }
+            //    }
+            //    throw;
+            //}
         }
 
         [HttpGet]
@@ -313,7 +312,7 @@ namespace ReceptionProcam.Controllers
             try
             {
                 var VisData = objVisEnti.tblVisitors.Where(s => s.Id == Id).FirstOrDefault();
-                clsVisitor VisDtls = new clsVisitor { Id = VisData.Id, VisitorId = VisData.VisitorId, Name = VisData.Name,Form = VisData.Form, ToMeet = VisData.ToMeet, SubLocation = VisData.SubLocation, AssetId = VisData.AssetId, MobileNo = VisData.MobileNo, Email = VisData.EmailId, ValidUpto = VisData.ValidUpto, Building = VisData.Building, Gate = VisData.Gate, Purpose = VisData.Purpose, TimeIn = VisData.TimeIn, Remark = VisData.Remark, ImagePath = VisData.ImagePath, CreatedBy = VisData.CreatedBy, CreatedDate = VisData.CreatedDate.ToString(), ModifiedBy = VisData.ModifiedBy, ModifiedDate = VisData.ModifiedDate.ToString() };
+                clsVisitor VisDtls = new clsVisitor { Id = VisData.Id, VisitorId = VisData.VisitorId, Name = VisData.Name, Form = VisData.Form, ToMeet = VisData.ToMeet, SubLocation = VisData.SubLocation, AssetId = VisData.AssetId, MobileNo = VisData.MobileNo, Email = VisData.EmailId, ValidUpto = VisData.ValidUpto, Building = VisData.Building, Gate = VisData.Gate, Purpose = VisData.Purpose, TimeIn = VisData.TimeIn, Remark = VisData.Remark, ImagePath = VisData.ImagePath, CreatedBy = VisData.CreatedBy, CreatedDate = VisData.CreatedDate.ToString(), ModifiedBy = VisData.ModifiedBy, ModifiedDate = VisData.ModifiedDate.ToString() };
                 return View(VisDtls);
             }
             catch (Exception ex)

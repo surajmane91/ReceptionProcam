@@ -28,12 +28,19 @@ $(function () {
         }
     });
 });
+
+
 function Capture() {
     webcam.capture();
     displayToastr();
+    $("#SubmitBtn").removeAttr("disabled","disabled")
 }
 function displayToastr() {
     toastr.success('Image Captured');
+}
+
+function displayMessage(msg) {
+    toastr.success(msg);
 }
 
 function Cancel() {
@@ -42,12 +49,16 @@ function Cancel() {
 
 $(document).ready(function () {
     $('#txtDOB').datepicker({
-        dateFormat: 'dd-mm-yy',
+        format: 'dd-mm-yyyy',
         autoclose: true,
         changeTime: false,
         endDate: new Date()
     });
 
+});
+
+$(document).ready(function () {
+    $('#txtVisitorId').attr('readonly', true)
 });
 
 //function printdiv(printpage) {
@@ -69,14 +80,20 @@ function printdiv(printpage) {
     return true;
 }
 
+//$(document).ready(function () {
+//    $('#txtValidUpto').datetimepicker({
+//        autoclose: true,
+//        startDate: new Date()
+//    });
+
+//});
 $(document).ready(function () {
-    $('#txtValidUpto').datetimepicker({
-        autoclose: true,
-        startDate: new Date()
-    });
+    if ($("#imgCapture").val() == "") {
+        toastr.warning("Please Capture Photo first!!")
+        $("#SubmitBtn").attr("disabled", "disabled")
 
-});
-
+    }
+})
 $(document).ready(function () {
 
     $('#txtInTime').datetimepicker({
@@ -99,3 +116,63 @@ $(document).ready(function () {
     });
 });
 
+$(document).ready(function () {
+    $("#ddlDays").change(function () {
+        debugger;
+        var AddDays = $('#ddlDays').val();
+        var startDate = new Date();
+        var timeIn = $('#hfTimeIn').val();
+        var ValidityDate = new Date();
+        if (AddDays == 1) {
+            $('#txtValidUpto').datetimepicker('remove');
+            ValidityDate.setDate(ValidityDate.getDate() + 0);
+            $('#txtValidUpto').attr('readonly', true)
+        }
+        else if (AddDays == 3) {
+            $('#txtValidUpto').datetimepicker('remove');
+            ValidityDate.setDate(ValidityDate.getDate() + 2);
+            $('#txtValidUpto').attr('readonly', true)
+        }
+        else if (AddDays == 7) {
+            $('#txtValidUpto').datetimepicker('remove');
+            ValidityDate.setDate(ValidityDate.getDate() + 6);
+            $('#txtValidUpto').attr('readonly', true)
+        }
+        else if (AddDays == 8) {
+            $('#txtValidUpto').attr('readonly', false)
+            $('#txtValidUpto').datetimepicker({
+                autoclose: true,
+                startDate: new Date()
+            });
+        }
+        var dd = ValidityDate.getDate();
+        var mm = ValidityDate.getMonth()+1;
+        var yyyy = ValidityDate.getFullYear();
+
+        if (dd < 10) {
+            dd = '0' + dd;
+        }
+
+        if (mm < 10) {
+            mm = '0' + mm;
+        }
+
+        ValidityDate = dd + '-' + mm + '-' + yyyy+' 23:59';
+        $('#txtValidUpto').val(ValidityDate);
+        
+        //if (Date.parse(timeIn) >= Date.parse(ValidityDate))
+        //{
+        //    toastr.warning("Validity date  must be greater than InTime.");
+        //    $('#txtValidUpto').val(ValidityDate);
+        //    //$('#txtValidUpto').val("");
+        //}
+        });
+});
+
+//function Check()
+//{
+//    if ($("#imgCapture").val() == "")
+//    {
+//        toastr.warning("Please Capture Photo first!!")
+//    }
+//}

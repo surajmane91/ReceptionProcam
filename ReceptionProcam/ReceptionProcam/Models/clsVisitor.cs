@@ -8,63 +8,82 @@ namespace ReceptionProcam.Models
 {
     public class clsVisitor
     {
+        public clsVisitor()
+        {
+            TimeIn = System.DateTime.Now.ToString("dd-MM-yyyy hh:mm");
+        }
+
+
         public int Id { get; set; }
-     
+
+        [DisplayName("Visitor Number")]
         public string VisitorId { get; set; }
-        
-        [Required(ErrorMessage = "* Please enter Name")]
+
+        [Required(ErrorMessage = "Please enter Name")]
         [DisplayName("Name")]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
+        [RegularExpression(@"^[a-zA-Z ]*$", ErrorMessage = "Use letters only please")]
         public string Name { get; set; }
 
         [DisplayName("Date of Birth")]
-        [Required(ErrorMessage = "* Please enter Date of Birth")]
+        [Required(ErrorMessage = "Please enter Date of Birth")]
         public string DOB { get; set; }
 
         [DisplayName("Identification Proof")]
-        [Required(ErrorMessage = "* Please select any identity proof")]
+        [Required(ErrorMessage = "Please select any identity proof")]
         public string GovId { get; set; }
 
         [DisplayName("Contact No")]
-        [Required(ErrorMessage = "* Please enter Mobile No")]
-        //[MaxLength(10, ErrorMessage = "* Please enter 10 Digit mobile No")]
-        [RegularExpression(@"^(\d{10})$", ErrorMessage = "* Please enter Valid Digit mobile No")]
+        [Required(ErrorMessage = "Please enter contact No")]
+        [StringLength(12, MinimumLength = 10, ErrorMessage = "* Please enter max 10 Digit mobile No")]
+        [RegularExpression("([1-9][0-9]*)", ErrorMessage = "* Please enter Valid Digit mobile No")]
         public string MobileNo { get; set; }
-        [Required(ErrorMessage = "* Mobile No is required")]
-        [DataType(DataType.EmailAddress, ErrorMessage = "* Please write valid Email Address")]
-        public string Email{ get; set; }
+
+
+        [DataType(DataType.EmailAddress, ErrorMessage = "Please write valid Email Address")]
+        public string Email { get; set; }
 
         [DisplayName("Asset ID")]
         public string AssetId { get; set; }
 
-         [DisplayName("From")]
-        [Required(ErrorMessage = "* Please From details")]
+        [DisplayName("From")]
+        [Required(ErrorMessage = "Please from details")]
         public string Form { get; set; }
-        [Required(ErrorMessage = "* Please enter First Name")]
+
+        [Required(ErrorMessage = "Please enter whom to meet")]
         [DisplayName("Meet")]
         public string ToMeet { get; set; }
-        [Required(ErrorMessage = "* Please enter sub Location")]
+
+
         [DisplayName("Office Sub Location")]
         public string SubLocation { get; set; }
-        [Required(ErrorMessage = "* Please enter building")]
+
+
         [DisplayName("Building")]
         public string Building { get; set; }
-        [Required(ErrorMessage = "* Please enter Gate No")]
+
+        [Required(ErrorMessage = "Please enter Gate No")]
         public string Gate { get; set; }
-        [Required(ErrorMessage = "* Please enter porpose to visit")]
+
+        [Required(ErrorMessage = "Please enter porpose to visit")]
         [DisplayName("Purpose")]
         public string Purpose { get; set; }
-        [Required(ErrorMessage = "* Please enter In Time")]
+
+        [Required(ErrorMessage = "Please enter In Time")]
         [DisplayName("Time In")]
         public string TimeIn { get; set; }
-        [Required(ErrorMessage = "* Please enter Valid date Time")]
+
+
         [DisplayName("Valid Upto")]
         public string ValidUpto { get; set; }
+
+        [DisplayName("Remarks")]
         public string Remark { get; set; }
         public string ImagePath { get; set; }
         public string CreatedBy { get; set; }
         public string CreatedDate { get; set; }
         public string ModifiedBy { get; set; }
         public string ModifiedDate { get; set; }
+
+
     }
 }
