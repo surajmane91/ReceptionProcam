@@ -8,6 +8,7 @@ using ReceptionProcam.EntityModel;
 using System.IO;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
+using System.Net.Mail;
 
 namespace ReceptionProcam.Controllers
 {
@@ -148,7 +149,8 @@ namespace ReceptionProcam.Controllers
                         dbVis.CreatedDate = Convert.ToDateTime(System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                         objVisEnti.tblVisitors.Add(dbVis);
                         objVisEnti.SaveChanges();
-                        TempData["Success"] = "Visitor added Successfully!";
+                        TempData["Success"] = "Visitor added Successfully & Mail Sent to concern person!";
+                        SendEmail(objVisitor);
                         return RedirectToAction("PrintPass", new { id = dbVis.Id });
 
                     }
@@ -168,20 +170,26 @@ namespace ReceptionProcam.Controllers
                 Console.WriteLine("Save" + ex.Message);
                 return View(objVisitor);
             }
-            //catch (DbEntityValidationException e)
-            //{
-            //    foreach (var eve in e.EntityValidationErrors)
-            //    {
-            //        Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-            //            eve.Entry.Entity.GetType().Name, eve.Entry.State);
-            //        foreach (var ve in eve.ValidationErrors)
-            //        {
-            //            Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-            //                ve.PropertyName, ve.ErrorMessage);
-            //        }
-            //    }
-            //    throw;
-            //}
+            
+        }
+
+        private void SendEmail(clsVisitor objVisitor)
+        {
+            System.Net.Mail.MailMessage mail = new MailMessage();
+            mail.To.Add("suraj.mane@ncs.com.sg");
+            mail.From = new MailAddress("kavan.mehta@ncs.com.sg");
+            mail.Subject = objVisitor.VisitorId + " - "+ "Coming to meet you";
+            string Body = "Visitor Name : " + objVisitor.Name + "<br/>" + "Visitor's Purpose : " + objVisitor.Purpose;
+            mail.Body = Body;
+            mail.IsBodyHtml = true;
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = "imap-mail.outlook.com";
+            smtp.Port = 587;
+            smtp.UseDefaultCredentials = false;
+            smtp.Credentials = new System.Net.NetworkCredential("kavan.mehta@ncs.com.sg", "aug@2018"); // Enter seders User name and password  
+            smtp.EnableSsl = true;
+            smtp.Send(mail);
+            //return RedirectToAction("PrintPass", new { id = dbVis.Id }); 
         }
 
         [HttpGet]
