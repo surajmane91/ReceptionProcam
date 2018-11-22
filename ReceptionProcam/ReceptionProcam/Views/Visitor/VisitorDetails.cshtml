@@ -39,7 +39,7 @@
                 <thead>
                     <tr>
                         <th>@Html.DisplayName("Visitor Image")</th>
-                        <th>@Html.DisplayName("Visitor Number")</th>
+                        <th>@Html.DisplayName("Visitor Id")</th>
                         <th>@Html.DisplayName("Full Name")</th>
                         <th>@Html.DisplayName("From")</th>
                         <th>@Html.DisplayName("To Meet")</th>
@@ -70,7 +70,7 @@
             </table>
         </div>
         <div style="padding-left: 46%; padding-bottom: 10px; padding-top: 10px;">
-            <input name="b_cancel" type="button" class="btn btn-danger" onclick="@("window.location.href='" + @Url.Action("CreateVisitor", "Visitor") + "'");" value="Back">
+            <input name="b_cancel" type="button" class="btn btn-danger" onclick="@("window.location.href='" + @Url.Action("Index", "home") + "'");" value="Back">
         </div>
     </div>
 }
