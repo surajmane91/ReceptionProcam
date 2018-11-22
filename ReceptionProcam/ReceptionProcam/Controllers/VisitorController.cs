@@ -128,7 +128,7 @@ namespace ReceptionProcam.Controllers
                     {
                         tblVisitor dbVis = new tblVisitor();
                         dbVis.VisitorId = objVisitor.VisitorId;
-                        dbVis.Name = objVisitor.Name;
+                        dbVis.Name = objVisitor.Name.ToUpper();
                         dbVis.EmailId = objVisitor.Email;
                         dbVis.MobileNo = objVisitor.MobileNo.ToString();
                         dbVis.AssetId = objVisitor.AssetId.ToString();
@@ -215,9 +215,9 @@ namespace ReceptionProcam.Controllers
                     {
 
                         dbVis.VisitorId = objVisitor.VisitorId;
-                        dbVis.Name = objVisitor.Name;
+                        dbVis.Name = objVisitor.Name.ToUpper();
                         dbVis.EmailId = objVisitor.Email;
-                        dbVis.MobileNo = objVisitor.MobileNo.ToString();
+                        dbVis.MobileNo = objVisitor.MobileNo.ToString().Trim();
                         dbVis.AssetId = objVisitor.AssetId.ToString();
                         dbVis.Form = objVisitor.Form;
                         dbVis.ToMeet = objVisitor.ToMeet;
@@ -283,7 +283,7 @@ namespace ReceptionProcam.Controllers
         {
             try
             {
-                var AllVisitors = objVisEnti.tblVisitors.ToList();
+                var AllVisitors = objVisEnti.tblVisitors.ToList().OrderByDescending(m => m.Id);
                 ViewBag.AllVisitorsDetalis = AllVisitors;
             }
             catch (Exception ex)

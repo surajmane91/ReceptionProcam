@@ -162,6 +162,7 @@ D:\Kavan\Project\ReceptionProcam\ReceptionProcam\ReceptionProcam\bin\Microsoft.O
 D:\Kavan\Project\ReceptionProcam\ReceptionProcam\ReceptionProcam\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 D:\Kavan\Project\ReceptionProcam\ReceptionProcam\ReceptionProcam\obj\Debug\ReceptionProcam.dll
 D:\Kavan\Project\ReceptionProcam\ReceptionProcam\ReceptionProcam\obj\Debug\ReceptionProcam.pdb
+D:\Kavan\Project\ReceptionProcam\ReceptionProcam\ReceptionProcam\obj\Debug\ReceptionProcam.csprojResolveAssemblyReference.cache
 E:\NCSProCamGIT\NCS_Git\ReceptionProcam\ReceptionProcam\ReceptionProcam\bin\ReceptionProcam.dll.config
 E:\NCSProCamGIT\NCS_Git\ReceptionProcam\ReceptionProcam\ReceptionProcam\bin\ReceptionProcam.dll
 E:\NCSProCamGIT\NCS_Git\ReceptionProcam\ReceptionProcam\ReceptionProcam\bin\ReceptionProcam.pdb
@@ -217,4 +218,3 @@ E:\NCSProCamGIT\NCS_Git\ReceptionProcam\ReceptionProcam\ReceptionProcam\bin\Micr
 E:\NCSProCamGIT\NCS_Git\ReceptionProcam\ReceptionProcam\ReceptionProcam\obj\Debug\ReceptionProcam.dll
 E:\NCSProCamGIT\NCS_Git\ReceptionProcam\ReceptionProcam\ReceptionProcam\obj\Debug\ReceptionProcam.pdb
 E:\NCSProCamGIT\NCS_Git\ReceptionProcam\ReceptionProcam\ReceptionProcam\obj\Debug\ReceptionProcam.csprojResolveAssemblyReference.cache
-D:\Kavan\Project\ReceptionProcam\ReceptionProcam\ReceptionProcam\obj\Debug\ReceptionProcam.csprojResolveAssemblyReference.cache
