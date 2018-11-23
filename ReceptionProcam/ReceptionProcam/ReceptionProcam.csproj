@@ -163,6 +163,10 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Area\AreaAreaRegistration.cs" />
+    <Compile Include="Areas\Area\Controllers\WelcomeController.cs" />
+    <Compile Include="Areas\Area\Controllers\IdentificationMasterController.cs" />
+    <Compile Include="Areas\Area\Models\IdentityMasters.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -181,6 +185,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>NCSVisitor.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\tblIdentityMaster.cs">
+      <DependentUpon>NCSVisitor.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModel\tblVisitor.cs">
       <DependentUpon>NCSVisitor.tt</DependentUpon>
@@ -400,6 +407,7 @@
     <Content Include="Content\assets\demo\default\custom\crud\metronic-datatable\scrolling\vertical.js" />
     <Content Include="Content\assets\demo\default\custom\crud\wizard\wizard.js" />
     <Content Include="Content\assets\demo\default\custom\header\actions.js" />
+    <Content Include="Content\assets\demo\default\media\img\logo\NcsCamPass.PNG" />
     <Content Include="Content\assets\demo\default\media\img\logo\NCSCamPro1.PNG" />
     <Content Include="Content\assets\demo\default\media\img\logo\NCSCamPro.PNG" />
     <Content Include="Content\assets\demo\default\media\img\logo\favicon.ico" />
@@ -410,6 +418,7 @@
     <Content Include="Content\assets\demo\default\media\img\logo\logo_default_light.png" />
     <Content Include="Content\assets\demo\default\media\img\logo\NCSCamPro2.PNG" />
     <Content Include="Content\assets\demo\default\media\img\logo\ncsiLogo.png" />
+    <Content Include="Content\assets\demo\default\media\img\logo\Under-construction.png" />
     <Content Include="Content\assets\demo\default\media\img\misc\notification_bg.jpg" />
     <Content Include="Content\assets\demo\default\media\img\misc\quick_actions_bg.jpg" />
     <Content Include="Content\assets\demo\default\media\img\misc\user_profile_bg.jpg" />
@@ -530,6 +539,12 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
+    <Content Include="Areas\Area\Views\web.config" />
+    <Content Include="Areas\Area\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Area\Views\IdentificationMaster\IdentityMaster.cshtml" />
+    <Content Include="Areas\Area\Views\IdentificationMaster\IdentityList.cshtml" />
+    <Content Include="Areas\Area\Views\IdentificationMaster\EditIdentity.cshtml" />
+    <Content Include="Areas\Area\Views\Welcome\Index.cshtml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />

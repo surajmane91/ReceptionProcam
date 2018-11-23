@@ -118,7 +118,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     $("#ddlDays").change(function () {
-        debugger;
+        //debugger;
         var AddDays = $('#ddlDays').val();
         var startDate = new Date();
         var timeIn = $('#hfTimeIn').val();

@@ -6,6 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="7bc3d0b07daf46f6b0bd65e84dddc9e9" Name="Diagram1" ZoomLevel="67">
         <EntityTypeShape EntityType="DBNCSVisitorModel.tblVisitor" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DBNCSVisitorModel.tblIdentityMaster" Width="1.5" PointX="3.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
